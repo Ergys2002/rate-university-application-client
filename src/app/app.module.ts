@@ -12,6 +12,9 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { CourseComponent } from './courses/course/course.component';
 import { LecturerComponent } from './lecturers/lecturer/lecturer.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import {RouterOutlet} from "@angular/router";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,11 +27,14 @@ import { AppRoutingModule } from './app-routing.module';
     HeaderComponent,
     FooterComponent,
     CourseComponent,
-    LecturerComponent
+    LecturerComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterOutlet,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
