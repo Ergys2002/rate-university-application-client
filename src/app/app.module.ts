@@ -13,7 +13,7 @@ import { CourseComponent } from './courses/course/course.component';
 import { LecturerComponent } from './lecturers/lecturer/lecturer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MyProfileComponent } from './my-profile/my-profile.component';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -34,7 +34,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
-    NgbModule
+    NgbModule,
+    RouterLink
   ],
   providers: [],
   bootstrap: [AppComponent]

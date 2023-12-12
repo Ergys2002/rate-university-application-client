@@ -1,1 +1,44 @@
-<p>header works!</p>
+<header>
+  <!-- Main Menu Start -->
+
+  <div class="site-navigation main_menu nav-tp" id="mainmenu-area">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="assets/images/logo-white.png" alt="Edutim" class="img-fluid">
+        </a>
+
+        <!-- Toggler -->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="fa fa-bars"></span>
+        </button>
+
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" [routerLink]="'/home-page'"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Home<i class="fa fa-angle-down"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" [routerLink]="'/courses'"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Courses<i class="fa fa-angle-down"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" [routerLink]="'/lecturers'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Lecturers<i class="fa fa-angle-down"></i>
+              </a>
+            </li>
+
+          </ul>
+
+          <a [routerLink]="'/login'" class="btn btn-main btn-small"><i class="fa fa-sign-in-alt mr-2"></i>Login</a>
+
+        </div> <!-- / .navbar-collapse -->
+      </div> <!-- / .container -->
+    </nav>
+  </div>
+</header>
