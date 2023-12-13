@@ -19,28 +19,16 @@ export class HomeComponent implements OnInit{
     this.homeService.getNumberOfInstructors().subscribe({
       next: result => {
         this.numberOfLecturers = result
-      },
-      error: () => {
-        console.log("Can not get number of instructors")
-        this.router.navigate(['/login']);
       }
     })
     this.homeService.getNumberOfCourses().subscribe({
       next: result => {
         this.numberOfCourses = result
-      },
-      error: () => {
-        console.log("Can not get number of courses")
-        this.router.navigate(['/login']);
       }
     })
     this.homeService.getNumberOfStudents().subscribe({
       next: result => {
         this.numberOfStudents = result
-      },
-      error: () => {
-        console.log("Can not get number of students")
-        this.router.navigate(['/login']);
       }
     })
   }

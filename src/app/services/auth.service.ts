@@ -18,7 +18,7 @@ export class AuthService {
 
   login(request: UserSignIn){
     return this.httpClient
-      .post<User>(environment.apiBaseUrl + "auth/login", request)
+      .post<User>(environment.apiBaseUrl + "user/login", request)
       .pipe(map(result => {
         if(result) {
           this.setUser(result)

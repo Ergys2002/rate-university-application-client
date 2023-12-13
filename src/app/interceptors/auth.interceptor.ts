@@ -20,7 +20,6 @@ export class AuthInterceptor implements HttpInterceptor {
     const req = request.clone({
       headers : this.authService.getUser().token ? request.headers.set("Authorization" , "Bearer " + this.authService.getUser().token) : request.headers
     });
-
     return next.handle(req).pipe(catchError(x => this.handleError(x)));
   }
 
@@ -29,7 +28,6 @@ export class AuthInterceptor implements HttpInterceptor {
       this.authService.clearUser();
       this.router.navigateByUrl("/login")
     }
-
     return throwError(() => err);
   }
 }
