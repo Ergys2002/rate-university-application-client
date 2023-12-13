@@ -29,7 +29,8 @@
         <div class="banner-content">
           <span class="subheading">Since 1951</span>
           <h1>Polytechnic University of Tirana</h1>
-          <p>The Polytechnic University of Tirana is a public university located in Tirana, the capital of Albania. It offers degrees in engineering and related fields.</p>
+          <p>The Polytechnic University of Tirana is a public university located in Tirana, the capital of Albania. It
+            offers degrees in engineering and related fields.</p>
           <a [routerLink]="'/courses'" class="btn btn-main"><i class="fa fa-list-ul mr-2"></i>See Courses </a>
         </div>
       </div>
@@ -53,7 +54,7 @@
             <div class="counter-item">
               <i class="ti-desktop"></i>
               <div class="count">
-                <span class="counter h2">90</span>
+                <span class="counter h2">{{numberOfLecturers}}</span>
               </div>
               <p>Expert Instructors</p>
             </div>
@@ -62,7 +63,7 @@
             <div class="counter-item">
               <i class="ti-agenda"></i>
               <div class="count">
-                <span class="counter h2">1450</span>
+                <span class="counter h2">{{numberOfCourses}}</span>
               </div>
               <p>Total Courses</p>
             </div>
@@ -72,9 +73,9 @@
             <div class="counter-item">
               <i class="ti-heart"></i>
               <div class="count">
-                <span class="counter h2">5697</span>
+                <span class="counter h2">{{numberOfStudents}}</span>
               </div>
-              <p>Happy Students</p>
+              <p>Active Students</p>
             </div>
           </div>
 
@@ -108,7 +109,8 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <a href="#" class="video-icon"><i class="fa fa-play"></i></a>
+        <a href="https://www.youtube.com/watch?v=zFb0Ppkzco0" target="_blank" class="video-icon"><i
+          class="fa fa-play"></i></a>
       </div>
     </div>
   </div>
@@ -122,66 +124,26 @@
     <div class="row justify-content-center">
       <div class="col-lg-6">
         <div class="section-heading center-heading">
-          <span class="subheading">Blog News</span>
-          <h3>Latest Blog News</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicin gelit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.</p>
+          <span class="subheading">About Us</span>
+          <h3>Who We Are</h3>
+          <p>The Polytechnic University of Tirana is the oldest
+            and the second largest university in Albania. It was
+            founded in 1951 and now has approximately 10,000 students,
+            who come from Albania, Kosova, Montenegro, and North Macedonia.
+            The university is fully accredited by the Albanian Public
+            Agency for Accreditation of Higher Education (APAAHE).</p>
         </div>
       </div>
     </div>
 
 
     <div class="row">
-      <div class="col-lg-4 col-md-6">
-        <div class="blog-item">
-          <img src="assets/images/blog/news-1.jpg" alt="" class="img-fluid">
-          <div class="blog-content">
-            <div class="entry-meta">
-              <span><i class="fa fa-calendar-alt"></i>May 19, 2020</span>
-              <span><i class="fa fa-comments"></i>1 comment</span>
-            </div>
 
-            <h2><a href="#">Powerful tips to grow business manner</a></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicin gelit, sed do eiusmod tempor incididunt ut labore et
-              dolore.</p>
-            <a href="#" class="btn btn-main btn-small"><i class="fa fa-plus-circle mr-2"></i>Read More</a>
-          </div>
-        </div>
-      </div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2118.9002861463323!2d19.82118614481304!3d41.31805354866567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135030e2870cc581%3A0x6c539e3ffce9fa68!2sPolytechnic%20University%20of%20Tirana!5e0!3m2!1sen!2s!4v1702381482620!5m2!1sen!2s"
+          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-      <div class="col-lg-4 col-md-6">
-        <div class="blog-item">
-          <img src="assets/images/blog/news-2.jpg" alt="" class="img-fluid">
-          <div class="blog-content">
-            <div class="entry-meta">
-              <span><i class="fa fa-calendar-alt"></i>May 19, 2020</span>
-              <span><i class="fa fa-comments"></i>1 comment</span>
-            </div>
-
-            <h2><a href="#">Powerful tips to grow effective manner</a></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicin gelit, sed do eiusmod tempor incididunt ut labore et
-              dolore.</p>
-            <a href="#" class="btn btn-main btn-small"><i class="fa fa-plus-circle mr-2"></i>Read More</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6">
-        <div class="blog-item">
-          <img src="assets/images/blog/news-3.jpg" alt="" class="img-fluid">
-          <div class="blog-content">
-            <div class="entry-meta">
-              <span><i class="fa fa-calendar-alt"></i>May 19, 2020</span>
-              <span><i class="fa fa-comments"></i>1 comment</span>
-            </div>
-
-            <h2><a href="#">Python may be you completed online </a></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicin gelit, sed do eiusmod tempor incididunt ut labore et
-              dolore.</p>
-            <a href="#" class="btn btn-main btn-small"><i class="fa fa-plus-circle mr-2"></i>Read More</a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>

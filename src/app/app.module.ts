@@ -15,6 +15,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import {RouterLink, RouterOutlet} from "@angular/router";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {HomePageService} from "./services/home-page.service";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -28,16 +33,31 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     CourseComponent,
     LecturerComponent,
-    MyProfileComponent
+    MyProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
     NgbModule,
-    RouterLink
+    RouterLink,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+
+
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

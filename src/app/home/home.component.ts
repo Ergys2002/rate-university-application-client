@@ -1,10 +1,49 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HomePageService} from "../services/home-page.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+  numberOfLecturers?: number;
+  numberOfCourses?: number;
+  numberOfStudents?: number;
+
+  constructor(private homeService: HomePageService, private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.homeService.getNumberOfInstructors().subscribe({
+      next: result => {
+        this.numberOfLecturers = result
+      },
+      error: () => {
+        console.log("Can not get number of instructors")
+        this.router.navigate(['/login']);
+      }
+    })
+    this.homeService.getNumberOfCourses().subscribe({
+      next: result => {
+        this.numberOfCourses = result
+      },
+      error: () => {
+        console.log("Can not get number of courses")
+        this.router.navigate(['/login']);
+      }
+    })
+    this.homeService.getNumberOfStudents().subscribe({
+      next: result => {
+        this.numberOfStudents = result
+      },
+      error: () => {
+        console.log("Can not get number of students")
+        this.router.navigate(['/login']);
+      }
+    })
+  }
+
 
 }
