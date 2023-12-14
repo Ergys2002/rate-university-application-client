@@ -8,6 +8,7 @@ import {CoursesComponent} from "./courses/courses.component";
 import {LecturerComponent} from "./lecturers/lecturer/lecturer.component";
 import {MyProfileComponent} from "./my-profile/my-profile.component";
 import {LecturersComponent} from "./lecturers/lecturers.component";
+import {CourseComponent} from "./courses/course/course.component";
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'courses', component: CoursesComponent},
   {path: 'lecturer', component: LecturerComponent},
   {path: 'lecturers', component: LecturersComponent},
-  {path: 'my-profile', component: MyProfileComponent}
+  {path: 'my-profile', component: MyProfileComponent},
+  {path: 'course', component: CourseComponent}
 ]
 
 
