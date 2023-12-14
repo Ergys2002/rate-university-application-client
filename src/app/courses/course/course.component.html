@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-2 col-3 text-right">
             <div class="search_toggle toggle-wrap d-inline-block">
-              <img class="search-close" src="src/assets/img/upt-image.jpg" srcset="assets/images/close@2x.png 2x" alt="FOTO"/>
+              <img class="search-close" src="../assets/img/upt-image.jpg" srcset="assets/images/close@2x.png 2x" alt="FOTO"/>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
             <span> <i class="fa-regular fa-bookmark"></i> Course Rating: {{singleCourse.courseRating}} / 100</span>
           </div>
 
-          <h3 class="single-course-title">{{singleCourse|json}}</h3>
+          <h3 class="single-course-title">{{singleCourse.title}}</h3>
 
           <div class="single-course-meta ">
             <ul>
@@ -76,9 +76,9 @@
                 <a href="#" class="d-inline-block" *ngIf="singleCourse.isAvailable; else elseBlock">
                   <i class="fa-solid fa-thumbs-up"></i>
                 </a>
-                <ng-template #elseBlock>
-                  <a href="#" class="d-inline-block">Course Not Available</a>
-                </ng-template>
+                  <ng-template #elseBlock>
+                    <a href="#" class="d-inline-block">Course Not Available</a>
+                  </ng-template>
               </li>
             </ul>
           </div>

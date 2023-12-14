@@ -20,6 +20,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
+    NgxPaginationModule,
 
 
   ],

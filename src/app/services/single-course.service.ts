@@ -7,9 +7,14 @@ import {environment} from "../environments/environment";
 })
 export class SingleCourseService {
 
+  courseId:string = "3895715a-6944-4514-8a17-940b4d55722b";
+
   constructor(private http: HttpClient) { }
 
   getCourse(){
-    return this.http.get(environment.apiBaseUrl + "courses/uuid/3895715a-6944-4514-8a17-940b4d55722b");
+    return this.http.get(environment.apiBaseUrl + "courses/uuid/" + this.courseId);
+  }
+  setCourseId(newCourseId:string){
+    this.courseId = newCourseId;
   }
 }

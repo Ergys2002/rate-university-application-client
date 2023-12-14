@@ -6,18 +6,10 @@ import {environment} from "../environments/environment";
   providedIn: 'root'
 })
 export class CoursesService {
-
   constructor(private http:HttpClient) { }
 
   getCoursePage(){
-    return this.http.get(environment.apiBaseUrl + "courses/page/1");
+    return this.http.get(environment.apiBaseUrl + "courses");
   }
 
-  getCoursePage2(){
-    return this.http.get(environment.apiBaseUrl + "courses/page/2");
-  }
-
-  getCoursePage3(){
-    return this.http.get((environment.apiBaseUrl + "courses/page/3"))
-  }
 }
