@@ -11,7 +11,7 @@ import {Course} from "../../../models/course.model";
 })
 export class CourseComponent implements OnInit{
 
-  singleCourse?: Course;
+  singleCourse!: Course;
 
   constructor(private courseService: CoursesService, private  router: ActivatedRoute) {
   }

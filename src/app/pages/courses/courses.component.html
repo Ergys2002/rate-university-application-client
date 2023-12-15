@@ -57,7 +57,7 @@
           <div class="course-block course-style-2">
             <div class="course-img">
               <img src="../../../assets/img/upt-image.jpg" alt="" class="img-fluid">
-              <span class="course-cat" *ngIf="course.isAvailable; else elseBlock">
+              <span class="course-cat" *ngIf="course.available; else elseBlock">
                   Available
               </span>
               <ng-template #elseBlock>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="course-content">
-              <h4><a (click)="onClick(course.id)">{{course.title}}</a></h4>
+              <h4><a [routerLink]="'/course/'+course.id">{{course.title}}</a></h4>
               <p>{{course.description}}</p>
 
               <div class="course-footer d-lg-flex align-items-center justify-content-between">

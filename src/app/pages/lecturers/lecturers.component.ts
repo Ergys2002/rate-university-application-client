@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {HomePageService} from "../services/home-page.service";
 import {Router} from "@angular/router";
-import {LecturerService} from "../services/lecturer.service"
-import {LecturerModel} from "../models/lecturer.model"
+import {LecturerModel} from "../../models/lecturer.model";
+import {HomePageService} from "../../services/home-page.service";
+import {LecturerService} from "../../services/lecturer.service";
 
 @Component({
   selector: 'app-lecturers',

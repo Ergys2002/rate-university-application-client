@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
+import {Observable} from "rxjs";
+import {Course} from "../models/course.model";
+import {CoursesComponent} from "../pages/courses/courses.component";
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +11,12 @@ import {environment} from "../environments/environment";
 export class CoursesService {
   constructor(private http:HttpClient) { }
 
-  getCoursePage(){
-    return this.http.get(environment.apiBaseUrl + "courses");
+  getCoursePage(): Observable<Course[]>{
+    return this.http.get<Course[]>(environment.apiBaseUrl + "courses");
   }
 
-  getCourseById(id : string){
-    return this.http.get(environment.apiBaseUrl + "courses/details?id=" + id)
+  getCourseById(id : string):Observable<Course>{
+    return this.http.get<Course>(environment.apiBaseUrl + "courses/details?id=" + id)
   }
 
 }

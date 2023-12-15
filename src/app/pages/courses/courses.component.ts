@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CoursesService} from "../../services/courses.service";
 import {SingleCourseService} from "../../services/single-course.service";
 import {Router} from "@angular/router";
+import {Course} from "../../models/course.model";
 
 @Component({
   selector: 'app-courses',
@@ -10,20 +11,19 @@ import {Router} from "@angular/router";
 })
 export class CoursesComponent implements OnInit{
   p : number = 1;
-  pageOfCourses:any;
+  pageOfCourses: Course[] = [];
 
   constructor(private coursesService:CoursesService,private singleCourseService:SingleCourseService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.coursesService.getCoursePage().subscribe((data)=>{
-      this.pageOfCourses = data;
-      console.log(data)
-    })
+    this.coursesService.getCoursePage().subscribe({
+      next : (data: Course[]) => {
+        this.pageOfCourses = data;
+        console.log(data)
+      }});
   }
 
-  onClick(id: string){
-    this.router.navigateByUrl("/course")
-  }
+
 
 }

@@ -54,11 +54,11 @@
 <!--            <a href="#"><i class="fa fa-star"></i></a>-->
 <!--            <a href="#"><i class="fa fa-star"></i></a>-->
 <!--            <a href="#"><i class="fa fa-star"></i></a>-->
-            <span *ngIf="singleCourse?.courseRating >= 0"> <i class="fa-regular fa-bookmark"></i> Course Rating: {{singleCourse?.courseRating}} / 5</span>
-            <span *ngIf="singleCourse?.courseRating < 0"> <i class="fa-regular fa-bookmark"></i> Course Rating: Not Rated Yet</span>
+            <span *ngIf="singleCourse.courseRating >= 0"> <i class="fa-regular fa-bookmark"></i> Course Rating: {{singleCourse.courseRating}} / 5</span>
+            <span *ngIf="singleCourse.courseRating < 0"> <i class="fa-regular fa-bookmark"></i> Course Rating: Not Rated Yet</span>
           </div>
 
-          <h3 class="single-course-title">{{singleCourse?.title}}</h3>
+          <h3 class="single-course-title">{{singleCourse.title}}</h3>
 
           <div class="single-course-meta ">
             <ul>
@@ -74,7 +74,7 @@
 
               <li>
                 <span><i class="fa-solid fa-shop"></i>Available :</span>
-                <a href="#" class="d-inline-block" *ngIf="singleCourse?.available; else elseBlock">
+                <a href="#" class="d-inline-block" *ngIf="singleCourse.available; else elseBlock">
                   <i class="fa-solid fa-thumbs-up"></i>
                 </a>
                   <ng-template #elseBlock>
@@ -87,7 +87,7 @@
 
         <div class="single-course-details ">
           <h4 class="course-title">Description</h4>
-          <p>{{singleCourse?.description}}</p>
+          <p>{{singleCourse.description}}</p>
 
 
           <div class="course-widget course-info">
@@ -198,7 +198,7 @@
 
           <div class="course-widget single-info">
             <i class="bi bi-group"></i>
-            Enrolled <span>{{singleCourse?.totalQuotes-singleCourse?.freeQuotes}} Students</span>
+            Enrolled <span>{{singleCourse.totalQuotes-singleCourse.freeQuotes}} Students</span>
           </div>
 
           <div class="course-widget course-details-info">
@@ -220,13 +220,13 @@
               <li>
                 <div class="d-flex justify-content-between align-items-center">
                   <span><i class="bi bi-flag"></i>Duration :</span>
-                  {{singleCourse?.startDate}}
+                  {{singleCourse.startDate}}
                 </div>
               </li>
               <li>
                 <div class="d-flex justify-content-between align-items-center">
                   <span><i class="bi bi-paper"></i>Lessons :</span>
-                  {{singleCourse?.endDate}}
+                  {{singleCourse.endDate}}
                 </div>
               <li>
                 <div class="d-flex justify-content-between align-items-center">
