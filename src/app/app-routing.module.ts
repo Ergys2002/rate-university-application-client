@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {HomeComponent} from "./home/home.component";
-import {LoginComponent} from "./login/login.component";
-import {SignUpComponent} from "./sign-up/sign-up.component";
-import {CoursesComponent} from "./courses/courses.component";
-import {LecturerComponent} from "./lecturers/lecturer/lecturer.component";
-import {MyProfileComponent} from "./my-profile/my-profile.component";
-import {LecturersComponent} from "./lecturers/lecturers.component";
-import {CourseComponent} from "./courses/course/course.component";
+import {HomeComponent} from "./pages/home/home.component";
+import {CoursesComponent} from "./pages/courses/courses.component";
+import {LecturerComponent} from "./pages/lecturers/lecturer/lecturer.component";
+import {LecturersComponent} from "./pages/lecturers/lecturers.component";
+import {CourseComponent} from "./pages/courses/course/course.component";
+import {LoginComponent} from "./pages/login/login.component";
+import {SignUpComponent} from "./pages/sign-up/sign-up.component";
+import {MyProfileComponent} from "./pages/my-profile/my-profile.component";
 
 
 const routes: Routes = [
@@ -17,10 +17,10 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'courses', component: CoursesComponent},
-  {path: 'lecturer', component: LecturerComponent},
+  {path: 'lecturer/:id', component: LecturerComponent},
   {path: 'lecturers', component: LecturersComponent},
   {path: 'my-profile', component: MyProfileComponent},
-  {path: 'course', component: CourseComponent}
+  {path: 'course/:id', component: CourseComponent}
 ]
 
 

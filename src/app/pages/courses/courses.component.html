@@ -56,7 +56,7 @@
         <div class="col-lg-4 col-md-6" *ngFor="let course of pageOfCourses | paginate: { itemsPerPage: 6, currentPage: p }">
           <div class="course-block course-style-2">
             <div class="course-img">
-              <img src="../../assets/img/upt-image.jpg" alt="" class="img-fluid">
+              <img src="../../../assets/img/upt-image.jpg" alt="" class="img-fluid">
               <span class="course-cat" *ngIf="course.isAvailable; else elseBlock">
                   Available
               </span>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="course-content">
-              <h4><a [routerLink]="'/course'" (click)="onClick(course.id)">{{course.title}}</a></h4>
+              <h4><a (click)="onClick(course.id)">{{course.title}}</a></h4>
               <p>{{course.description}}</p>
 
               <div class="course-footer d-lg-flex align-items-center justify-content-between">

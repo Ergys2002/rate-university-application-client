@@ -12,4 +12,8 @@ export class CoursesService {
     return this.http.get(environment.apiBaseUrl + "courses");
   }
 
+  getCourseById(id : string){
+    return this.http.get(environment.apiBaseUrl + "courses/details?id=" + id)
+  }
+
 }
