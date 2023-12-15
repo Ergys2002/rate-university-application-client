@@ -17,4 +17,12 @@ export class SingleCourseService {
   setCourseId(newCourseId:string){
     this.courseId = newCourseId;
   }
+
+  enrollUser(userEmail:string,courseUUID:string){
+    return this.http.patch(environment.apiBaseUrl + `courses`,
+      {
+        "email": userEmail,
+        "id":courseUUID
+      });
+  }
 }

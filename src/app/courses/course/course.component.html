@@ -57,7 +57,7 @@
             <span> <i class="fa-regular fa-bookmark"></i> Course Rating: {{singleCourse.courseRating}} / 100</span>
           </div>
 
-          <h3 class="single-course-title">{{singleCourse.title}}</h3>
+          <h3 class="single-course-title">{{singleCourse|json}}</h3>
 
           <div class="single-course-meta ">
             <ul>
@@ -115,124 +115,7 @@
             </ul>
           </div>
         </div>
-        <!--  Course Topics -->
-<!--        <div class="edutim-single-course-segment  edutim-course-topics-wrap">-->
-<!--          <div class="edutim-course-topics-header d-lg-flex justify-content-between">-->
-<!--            <div class="edutim-course-topics-header-left">-->
-<!--              <h4 class="course-title">Topics for this course</h4>-->
-<!--            </div>-->
-<!--            <div class="edutim-course-topics-header-right">-->
-<!--              <span> Total learning: <strong>14 Lessons</strong></span>-->
-<!--              <span> Time: <strong>13h 20m 20s</strong> </span>-->
-<!--            </div>-->
-<!--          </div>-->
 
-<!--          <div class="edutim-course-topics-contents">-->
-<!--            <div class="edutim-course-topic ">-->
-<!--              <div class="accordion" id="accordionExample">-->
-<!--                <div class="card">-->
-<!--                  <div class="card-header" id="headingOne">-->
-<!--                    <h2 class="mb-0">-->
-<!--                      <button class="btn-block text-left curriculmn-title-btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
-<!--                        <h4 class="curriculmn-title">Introduction & Get Started</h4>-->
-<!--                      </button>-->
-<!--                    </h2>-->
-<!--                  </div>-->
-
-<!--                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">-->
-<!--                    <div class="course-lessons">-->
-<!--                      <div class="single-course-lesson">-->
-<!--                        <div class="course-topic-lesson">-->
-<!--                          <i class="fab fa-youtube"></i>-->
-<!--                          <span> Work with Smart Objects</span>-->
-<!--                        </div>-->
-<!--                        <div class="course-lesson-duration">-->
-<!--                          00:05:20-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-<!--                <div class="card">-->
-<!--                  <div class="card-header" id="headingTwo">-->
-<!--                    <h2 class="mb-0">-->
-<!--                      <button class="btn-block text-left collapsed curriculmn-title-btn" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
-<!--                        <h4 class="curriculmn-title"> Artboards & Raster Layers</h4>-->
-<!--                      </button>-->
-<!--                    </h2>-->
-<!--                  </div>-->
-<!--                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">-->
-<!--                    <div class="course-lessons">-->
-<!--                      <div class="single-course-lesson">-->
-<!--                        <div class="course-topic-lesson">-->
-<!--                          <i class="fab fa-youtube"></i>-->
-<!--                            <span>Use Photoshop’s Interface Efficiently</span>-->
-<!--                        </div>-->
-<!--                        <div class="course-lesson-duration">-->
-<!--                          00:05:20-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="single-course-lesson">-->
-<!--                        <div class="course-topic-lesson">-->
-<!--                          <i class="fab fa-youtube"></i>-->
-<!--                          <span>Use the Eye Dropper & Swatches</span>-->
-<!--                        </div>-->
-<!--                        <div class="course-lesson-duration">-->
-<!--                          00:05:20-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-<!--                <div class="card">-->
-<!--                  <div class="card-header" id="headingThree">-->
-<!--                    <h2 class="mb-0">-->
-<!--                      <button class="btn-block text-left collapsed curriculmn-title-btn" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
-<!--                        <h4 class="curriculmn-title">Work with Smart Objects</h4>-->
-<!--                      </button>-->
-<!--                    </h2>-->
-<!--                  </div>-->
-
-<!--                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">-->
-<!--                    <div class="course-lessons">-->
-<!--                      <div class="single-course-lesson">-->
-<!--                        <div class="course-topic-lesson">-->
-<!--                          <i class="fab fa-youtube"></i>-->
-<!--                          <span>Smart Objects Explained</span>-->
-<!--                        </div>-->
-<!--                        <div class="course-lesson-duration">-->
-<!--                          00:05:20-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="single-course-lesson">-->
-<!--                        <div class="course-topic-lesson">-->
-<!--                          <i class="fab fa-youtube"></i>-->
-<!--                          <span>Filters with Smart Objects</span>-->
-<!--                        </div>-->
-<!--                        <div class="course-lesson-duration">-->
-<!--                          00:05:20-->
-<!--                        </div>-->
-<!--                      </div>-->
-
-<!--                      <div class="single-course-lesson">-->
-<!--                        <div class="course-topic-lesson">-->
-<!--                          <i class="fab fa-youtube"></i>-->
-<!--                          <span>Clean Up Face Imperfections</span>-->
-<!--                        </div>-->
-<!--                        <div class="course-lesson-duration">-->
-<!--                          00:05:20-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-        <!--  COurse Topics End -->
 
         <div class="course-widget course-info">
           <h4 class="course-title">About the instructors</h4>
