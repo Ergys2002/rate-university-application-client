@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.loggedIn = this.isTokenValid()
+    this.loggedIn = this.isTokenValid();
   }
 
   isTokenValid() : boolean{
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit{
 
     const expArray = expirationDate.split("-")
 
-    return day < Number(expArray[2]) && month === Number(expArray[1]) && year === Number(expArray[0]);
+    return day <= Number(expArray[2]) && month === Number(expArray[1]) && year === Number(expArray[0]);
 
 }
 
