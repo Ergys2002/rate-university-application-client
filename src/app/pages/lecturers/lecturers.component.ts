@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
-import {LecturerModel} from "../../models/lecturer.model";
+import {Lecturer} from "../../models/lecturer.model";
 import {HomePageService} from "../../services/home-page.service";
 import {LecturerService} from "../../services/lecturer.service";
 
@@ -13,9 +13,8 @@ export class LecturersComponent {
   numberOfLecturers?: number;
   numberOfCourses?: number;
   numberOfStudents?: number;
-  lecturers: LecturerModel[] = [];
-
-
+  lecturers: Lecturer[] = [];
+  p : number = 1;
 
 
   constructor(private homeService: HomePageService, private lecturerService: LecturerService, private router: Router) {
@@ -46,5 +45,7 @@ export class LecturersComponent {
         console.log(data)
       }
     });
+
+
   }
 }
