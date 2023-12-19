@@ -23,7 +23,6 @@ export class LecturerComponent {
     this.lecturerService.getLecturerById(id).subscribe({
       next: result => {
         this.singleLecturer = result;
-        console.log(this.singleLecturer.firstName)
       }
     });
 

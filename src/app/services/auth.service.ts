@@ -61,4 +61,8 @@ export class AuthService {
     localStorage.removeItem("user");
     this.userSubject.next({});
   }
+
+  loggedInUser() :  Observable <User>{
+    return this.httpClient.get<User>(environment.apiBaseUrl + "/loggedInUser")
+  }
 }
