@@ -13,7 +13,11 @@ export class CourseComponent implements OnInit{
 
   singleCourse!: Course;
 
-  constructor(private courseService: CoursesService, private  router: ActivatedRoute) {
+  isStudentEnrolled: Object = false;
+
+  constructor(private courseService: CoursesService, private  router: ActivatedRoute
+  ,private singleCourseService: SingleCourseService) {
+
   }
 
   ngOnInit() {
@@ -24,6 +28,11 @@ export class CourseComponent implements OnInit{
         }
     });
 
+  }
+
+  isEnrolled(courseId:string,userEmail:string){
+    this.singleCourseService.isEnrolled(courseId,userEmail);
+    this.isStudentEnrolled = this.singleCourseService.isStudentEnrolled;
   }
 
 }

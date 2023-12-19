@@ -1,21 +1,61 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
+import {Course} from "../models/course.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SingleCourseService {
 
-  courseId:string = "3895715a-6944-4514-8a17-940b4d55722b";
+  isStudentEnrolled:Object = false;
+
+  public getIsStudentEnrolled(){
+    return this.isStudentEnrolled;
+  }
 
   constructor(private http: HttpClient) { }
 
-  getCourse(){
-    return this.http.get(environment.apiBaseUrl + "courses/uuid/" + this.courseId);
+  isEnrolled(courseId:string,email:string){
+      const data = {
+        courseId : courseId,
+        email : email
+      }
+      const url =  environment.apiBaseUrl + "courses/isEnrolled";
+
+    this.http.post(url, data).subscribe(
+      (response) => {
+        console.log('Post request successful', response);
+        if (response == true){
+          alert("You are already enrolled in this Course");
+        }
+        else if (response == false){
+          this.enrollUser(email,courseId);
+          alert("Ju sapo u regjistruat ne kurs!");
+        }
+        this.isStudentEnrolled = response;
+      },
+      (error) => {
+        console.error('Error in post request', error);
+      }
+    );
   }
 
-  setCourseId(newCourseId:string){
-    this.courseId = newCourseId;
+  enrollUser(email:string,courseId:string){
+    const data = {
+      email : email,
+      courseId : courseId
+    }
+    const url =  environment.apiBaseUrl + "courses/enroll";
+
+    this.http.post(url, data).subscribe(
+      (response) => {
+        console.log('enroll request successful', response);
+      },
+      (error) => {
+        console.error('Error in post request', error);
+      }
+    );
   }
+
 }
