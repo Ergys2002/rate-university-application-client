@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {User} from "../../models/user.model";
+import {UserDetails} from "../../models/user.model";
 
 @Component({
   selector: 'app-my-profile',
@@ -9,7 +9,7 @@ import {User} from "../../models/user.model";
 })
 export class MyProfileComponent implements OnInit{
 
-  loggedInUser!: User;
+  loggedInUser!: UserDetails;
 
   constructor( private authService: AuthService) {
   }

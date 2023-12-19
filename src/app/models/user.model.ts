@@ -12,3 +12,12 @@ export interface User {
   token?: string;
   role?: string;
 }
+
+export interface UserDetails {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  birthDate?: string;
+  phoneNumber?: string;
+  profilePhoto?: string;
+}

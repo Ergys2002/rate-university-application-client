@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, map } from 'rxjs';
-import { User, UserSignIn } from '../models/user.model';
+import { User, UserSignIn, UserDetails } from '../models/user.model';
 import {environment} from "../environments/environment";
 
 @Injectable({
@@ -62,7 +62,7 @@ export class AuthService {
     this.userSubject.next({});
   }
 
-  loggedInUser() :  Observable <User>{
-    return this.httpClient.get<User>(environment.apiBaseUrl + "/loggedInUser")
+  loggedInUser() :  Observable <UserDetails>{
+    return this.httpClient.get<UserDetails>(environment.apiBaseUrl + "user/logged-in-user")
   }
 }
