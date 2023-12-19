@@ -14,6 +14,7 @@ export class SingleCourseService {
   getCourse(){
     return this.http.get(environment.apiBaseUrl + "courses/uuid/" + this.courseId);
   }
+
   setCourseId(newCourseId:string){
     this.courseId = newCourseId;
   }
