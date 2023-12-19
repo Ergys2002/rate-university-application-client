@@ -191,7 +191,12 @@
             <img src="assets/images/course/course2.jpg" alt="" class="img-fluid w-100">
             <div class="course-price-wrapper">
               <div class="course-price ml-3"><h5>Price: <span>Included on college tuition</span></h5></div>
-              <div class="buy-btn"><a href="#" class="btn btn-main btn-block">Enroll now</a></div>
+              <div class="buy-btn">
+                <a class="btn btn-main btn-block"
+                   (click)="isEnrolled(singleCourse.id,'a')">
+                    Enroll Now
+                </a>
+              </div>
             </div>
           </div>
 
