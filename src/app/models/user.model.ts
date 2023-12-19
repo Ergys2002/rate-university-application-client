@@ -14,10 +14,10 @@ export interface User {
 }
 
 export interface UserDetails {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  birthDate?: string;
-  phoneNumber?: string;
-  profilePhoto?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  birthDate: string;
+  phoneNumber: string;
+  profilePhoto: string;
 }

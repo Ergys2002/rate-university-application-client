@@ -62,7 +62,7 @@ export class AuthService {
     this.userSubject.next({});
   }
 
-  loggedInUser() :  Observable <UserDetails>{
+  loggedInUser() :  Observable<UserDetails>{
     return this.httpClient.get<UserDetails>(environment.apiBaseUrl + "user/logged-in-user")
   }
 }

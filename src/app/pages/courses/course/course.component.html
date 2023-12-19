@@ -193,7 +193,7 @@
               <div class="course-price ml-3"><h5>Price: <span>Included on college tuition</span></h5></div>
               <div class="buy-btn">
                 <a class="btn btn-main btn-block"
-                   (click)="isEnrolled(singleCourse.id,'a')">
+                   (click)="isEnrolled()">
                     Enroll Now
                 </a>
               </div>
@@ -203,7 +203,7 @@
 
           <div class="course-widget single-info">
             <i class="bi bi-group"></i>
-            Enrolled <span>{{singleCourse.totalQuotes-singleCourse.freeQuotes}} Students</span>
+            Enrolled <span>{{singleCourse.enrolledStudents}} Students</span>
           </div>
 
           <div class="course-widget course-details-info">

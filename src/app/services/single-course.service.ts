@@ -9,6 +9,7 @@ import {Course} from "../models/course.model";
 export class SingleCourseService {
 
   isStudentEnrolled:Object = false;
+  noOfStudents : number = 0;
 
   public getIsStudentEnrolled(){
     return this.isStudentEnrolled;
@@ -56,6 +57,15 @@ export class SingleCourseService {
         console.error('Error in post request', error);
       }
     );
+  }
+
+  getEnrolledStudents(courseId:string){
+    this.http.get(environment.apiBaseUrl + "courses/enrolled-students/" + courseId)
+      .subscribe(
+        (data)=>{
+          this.noOfStudents = Object.keys(data).length;
+        }
+      )
   }
 
 }

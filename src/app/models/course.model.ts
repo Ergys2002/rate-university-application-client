@@ -9,4 +9,5 @@ export interface Course{
   courseRating : number;
   startDate: Date;
   endDate: Date;
+  enrolledStudents:number
 }

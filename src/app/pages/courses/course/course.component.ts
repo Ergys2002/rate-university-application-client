@@ -3,6 +3,8 @@ import {SingleCourseService} from "../../../services/single-course.service";
 import {ActivatedRoute} from "@angular/router";
 import {CoursesService} from "../../../services/courses.service";
 import {Course} from "../../../models/course.model";
+import {AuthService} from "../../../services/auth.service";
+import {UserDetails} from "../../../models/user.model";
 
 @Component({
   selector: 'app-course',
@@ -15,8 +17,10 @@ export class CourseComponent implements OnInit{
 
   isStudentEnrolled: Object = false;
 
+  loggedInUser: UserDetails | any;
+
   constructor(private courseService: CoursesService, private  router: ActivatedRoute
-  ,private singleCourseService: SingleCourseService) {
+  ,private singleCourseService: SingleCourseService,private authService: AuthService) {
 
   }
 
@@ -27,11 +31,23 @@ export class CourseComponent implements OnInit{
         this.singleCourse = result;
         }
     });
-
+    this.getLoggedUser();
   }
 
-  isEnrolled(courseId:string,userEmail:string){
-    this.singleCourseService.isEnrolled(courseId,userEmail);
+  getLoggedUser(){
+    this.authService.loggedInUser().subscribe({
+      next: (result : UserDetails) => {
+        this.loggedInUser = result;
+      }
+    });
+
+    console.log('prove')
+    console.log('Logged in user: '+this.loggedInUser)
+  }
+
+
+  isEnrolled(){
+    this.singleCourseService.isEnrolled(this.singleCourse.id,this.loggedInUser.email);
     this.isStudentEnrolled = this.singleCourseService.isStudentEnrolled;
   }
 
