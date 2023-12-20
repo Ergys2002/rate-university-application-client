@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {UserDetails} from "../../models/user.model";
+import {CoursesService} from "../../services/courses.service";
+import {Course} from "../../models/course.model";
 
 @Component({
   selector: 'app-my-profile',
@@ -11,7 +13,11 @@ export class MyProfileComponent implements OnInit{
 
   loggedInUser!: UserDetails;
 
-  constructor( private authService: AuthService) {
+  coursesOfAuthenticatedUser: Course[] = [];
+
+  activeTab: string = 'profile';
+
+  constructor( private authService: AuthService, private coursesService:CoursesService) {
   }
   ngOnInit() {
     this.authService.loggedInUser().subscribe({
@@ -19,7 +25,16 @@ export class MyProfileComponent implements OnInit{
         this.loggedInUser = result;
       }
     });
-    console.log('prove')
-    console.log(this.loggedInUser)
+
+    this.coursesService.getAllCoursesOfAuthenticatedUser().subscribe({
+      next : (data: Course[]) => {
+        this.coursesOfAuthenticatedUser = data;
+      }});
+
   }
+  setActiveTab(tab: string) {
+    this.activeTab = tab;
+    console.log(this.activeTab)
+  }
+
 }
