@@ -32,7 +32,7 @@ export class SingleCourseService {
         }
         else if (response == false){
           this.enrollUser(email,courseId);
-          alert("Ju sapo u regjistruat ne kurs!");
+          window.location.reload();
         }
         this.isStudentEnrolled = response;
       },
@@ -51,6 +51,7 @@ export class SingleCourseService {
 
     this.http.post(url, data).subscribe(
       (response) => {
+        alert("Ju sapo u regjistruat ne kurs");
         console.log('enroll request successful', response);
       },
       (error) => {
@@ -66,6 +67,25 @@ export class SingleCourseService {
           this.noOfStudents = Object.keys(data).length;
         }
       )
+  }
+
+  dropOutOfCourse(email:string,courseId:string){
+    const data = {
+      email : email,
+      courseId : courseId
+    }
+    const url =  environment.apiBaseUrl + "drop-course";
+
+    this.http.post(url, data).subscribe(
+      (response) => {
+        alert("You dropped out of course");
+        window.location.reload();
+        console.log('dropCourse request successful', response);
+      },
+      (error) => {
+        console.error('Error in post request', error);
+      }
+    );
   }
 
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SingleCourseService} from "../../../services/single-course.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CoursesService} from "../../../services/courses.service";
 import {Course} from "../../../models/course.model";
 import {AuthService} from "../../../services/auth.service";
@@ -19,8 +19,11 @@ export class CourseComponent implements OnInit{
 
   loggedInUser: UserDetails | any;
 
-  constructor(private courseService: CoursesService, private  router: ActivatedRoute
-  ,private singleCourseService: SingleCourseService,private authService: AuthService) {
+  constructor(private courseService: CoursesService,
+              private  router: ActivatedRoute,
+              private singleCourseService: SingleCourseService,
+              private authService: AuthService,
+              ) {
 
   }
 
@@ -50,5 +53,10 @@ export class CourseComponent implements OnInit{
     this.singleCourseService.isEnrolled(this.singleCourse.id,this.loggedInUser.email);
     this.isStudentEnrolled = this.singleCourseService.isStudentEnrolled;
   }
+
+  dropOut(){
+    this.singleCourseService.dropOutOfCourse(this.loggedInUser.email,this.singleCourse.id);
+  }
+
 
 }
