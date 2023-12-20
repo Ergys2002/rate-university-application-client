@@ -20,6 +20,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {LoginComponent} from "./pages/login/login.component";
 import {SignUpComponent} from "./pages/sign-up/sign-up.component";
 import {MyProfileComponent} from "./pages/my-profile/my-profile.component";
+import { ReviewsComponent } from './pages/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MyProfileComponent} from "./pages/my-profile/my-profile.component";
     CourseComponent,
     LecturerComponent,
     MyProfileComponent,
+    ReviewsComponent,
   ],
   imports: [
     BrowserModule,
