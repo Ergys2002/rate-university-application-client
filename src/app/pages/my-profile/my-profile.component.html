@@ -22,7 +22,7 @@
                   <i class="fa fa-phone-square"></i>
                 </div>
                 <div class="list-details">
-                  <span>9910XXXXXX</span>
+                  <span>{{ loggedInUser.phoneNumber }}</span>
                   <small>Mobile Number</small>
                 </div>
               </li>
@@ -31,32 +31,15 @@
                   <i class="fa fa-envelope"></i>
                 </div>
                 <div class="list-details">
-                  <span>info@example.com</span>
+                  <span>{{ loggedInUser.email }}</span>
                   <small>Email Address</small>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="list-icon">
-                  <i class="fa fa-globe"></i>
-                </div>
-                <div class="list-details">
-                  <span>www.example.com</span>
-                  <small>Website Address</small>
                 </div>
               </li>
             </ul>
             <div class="row text-center mt-4">
               <div class="col p-2">
                 <h4 class="mb-1 line-height-5">154</h4>
-                <small class="mb-0 font-weight-bold">Projects</small>
-              </div>
-              <div class="col p-2">
-                <h4 class="mb-1 line-height-5">2.2k</h4>
-                <small class="mb-0 font-weight-bold">Followers</small>
-              </div>
-              <div class="col p-2">
-                <h4 class="mb-1 line-height-5">9.1k</h4>
-                <small class="mb-0 font-weight-bold">Views</small>
+                <small class="mb-0 font-weight-bold">Courses</small>
               </div>
             </div>
           </div>
@@ -68,120 +51,65 @@
         <div class="card-body">
           <ul class="nav nav-pills nav-pills-primary nav-justified">
             <li class="nav-item">
-              <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active show"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+              <a  (click)="setActiveTab('courses')" class="nav-link" [class.active]="activeTab === 'courses'"><i class="icon-user"></i> <span class="hidden-xs">Courses</span></a>
             </li>
             <li class="nav-item">
-              <a href="javascript:void();" data-target="#messages" data-toggle="pill" class="nav-link"><i class="icon-envelope-open"></i> <span class="hidden-xs">Messages</span></a>
+              <a  (click)="setActiveTab('reviews')" class="nav-link" [class.active]="activeTab === 'reviews'"><i class="icon-envelope-open"></i> <span class="hidden-xs">My Reviews</span></a>
             </li>
             <li class="nav-item">
-              <a href="javascript:void();" data-target="#edit" data-toggle="pill" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Edit</span></a>
+              <a  (click)="setActiveTab('edit')" class="nav-link" [class.active]="activeTab === 'edit'"><i class="icon-note"></i> <span class="hidden-xs">Edit</span></a>
             </li>
           </ul>
-          <div class="tab-content p-3">
-            <div class="tab-pane active show" id="profile">
-              <h5 class="mb-3">User Profile</h5>
+          <div class="p-3">
+            <div class="tab-pane" *ngIf="activeTab === 'courses'">
               <div class="row">
-                <div class="col-md-6">
-                  <h6>About</h6>
-                  <p>
-                    Web Designer, UI/UX Engineer
-                  </p>
-                  <h6>Hobbies</h6>
-                  <p>
-                    Indie music, skiing and hiking. I love the great outdoors.
-                  </p>
-                </div>
-                <div class="col-md-6">
-                  <h6>Recent badges</h6>
-                  <a href="javascript:void();" class="badge badge-dark badge-pill">html5</a>
-                  <a href="javascript:void();" class="badge badge-dark badge-pill">react</a>
-                  <a href="javascript:void();" class="badge badge-dark badge-pill">codeply</a>
-                  <a href="javascript:void();" class="badge badge-dark badge-pill">angularjs</a>
-                  <a href="javascript:void();" class="badge badge-dark badge-pill">css3</a>
-                  <a href="javascript:void();" class="badge badge-dark badge-pill">jquery</a>
-                  <a href="javascript:void();" class="badge badge-dark badge-pill">bootstrap</a>
-                  <a href="javascript:void();" class="badge badge-dark badge-pill">responsive-design</a>
-                  <hr>
-                  <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
-                  <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
-                  <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
-                </div>
-                <div class="col-md-12">
-                  <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
-                  <table class="table table-hover table-striped">
-                    <tbody>
-                    <tr>
-                      <td>
-                        <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
+                <div class="col-md-4 col-sm-6 mb-4 pb-2" *ngFor="let course of coursesOfAuthenticatedUser">
+                  <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+                    <div class="list-card-image">
+                      <a href="#">
+                        <img src="img/list/4.png" class="img-fluid item-img">
+                      </a>
+                    </div>
+                    <div class="p-3 position-relative">
+                      <div class="list-card-body">
+                        <h6><a [routerLink]="'/course/'+course.id">{{course.title}}</a></h6>
+                        <p class="text-gray mb-3">{{ course.description }}</p>
+                        <div class="time">
+                          <span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
+                          Start Date:  {{ course.startDate }}
+                          </span>
+                          <br>
+                          <span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
+                          End Date:    {{ course.endDate }}
+                          </span>
+                        </div>
+                        <br>
+                        <div class="quotes">
+                          <span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
+                          Total quotes:  {{ course.totalQuotes }}
+                          </span>
+                          <br>
+                          <span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
+                          Free quotes:    {{ course.freeQuotes }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="list-card-badge">
+                        <i class="icofont-star text-warning" *ngFor="let _ of [].constructor(5); let i = index">{{ i < course.courseRating ? '★' : '☆' }}</i>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <!--/row-->
+
             </div>
-            <div class="tab-pane" id="messages">
-              <div class="alert alert-info alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <div class="alert-icon">
-                  <i class="icon-info"></i>
-                </div>
-                <div class="alert-message">
-                  <span><strong>Info!</strong> Lorem Ipsum is simply dummy text.</span>
-                </div>
-              </div>
-              <table class="table table-hover table-striped">
-                <tbody>
-                <tr>
-                  <td>
-                    <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus.
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros.
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+
+            <div class="tab-pane" *ngIf="activeTab === 'reviews'">
+
             </div>
-            <div class="tab-pane" id="edit">
+
+            <div class="tab-pane" *ngIf="activeTab === 'edit'">
+              <p>This is the Edit tab. Add your edit-related content here.</p>
               <form>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">First name</label>
@@ -207,34 +135,7 @@
                     <input class="form-control" type="file">
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-lg-3 col-form-label form-control-label">Website</label>
-                  <div class="col-lg-9">
-                    <input class="form-control" type="url" value="">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                  <div class="col-lg-9">
-                    <input class="form-control" type="text" value="" placeholder="Street">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-lg-3 col-form-label form-control-label"></label>
-                  <div class="col-lg-6">
-                    <input class="form-control" type="text" value="" placeholder="City">
-                  </div>
-                  <div class="col-lg-3">
-                    <input class="form-control" type="text" value="" placeholder="State">
-                  </div>
-                </div>
 
-                <div class="form-group row">
-                  <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                  <div class="col-lg-9">
-                    <input class="form-control" type="text" value="jhonsanmark">
-                  </div>
-                </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Password</label>
                   <div class="col-lg-9">
@@ -260,7 +161,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 <app-footer></app-footer>

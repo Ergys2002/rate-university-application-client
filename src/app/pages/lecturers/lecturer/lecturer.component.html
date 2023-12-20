@@ -17,7 +17,7 @@
                 <p>{{ singleLecturer.email }}</p>
 
                 <div class="list-card-badge">
-                  <i class="icofont-star text-warning" *ngFor="let _ of [].constructor(5); let i = index">{{ i < (singleLecturer?.rating ?? 0) ? '★' : '☆' }}</i>
+                  <i class="icofont-star text-warning" *ngFor="let _ of [].constructor(5); let i = index">{{ i < (singleLecturer.rating ?? 0) ? '★' : '☆' }}</i>
                 </div>
               </div>
             </div>
