@@ -145,24 +145,26 @@
           <h4 class="course-title">Students Feedback</h4>
 
           <div class="course-review-wrapper">
-            <div class="course-review">
-              <div class="profile-img">
-                <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
-              </div>
-              <div class="review-text">
-                <h5>Mehedi Rasedh  <span>26th june 2020</span></h5>
+<!--            //single review-->
+<!--            <div class="course-review">-->
+<!--              <div class="profile-img">-->
+<!--                <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">-->
+<!--              </div>-->
+<!--              <div class="review-text">-->
+<!--                <h5>Mehedi Rasedh  <span>26th june 2020</span></h5>-->
 
-                <div class="rating">
-                  <a href="#"><i class="fa fa-star"></i></a>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                  <a href="#"><i class="fa fa-star"></i></a>
-                  <a href="#"><i class="fa fa-star-half"></i></a>
-                </div>
-                <p>Great course. Well structured, paced and I feel far more confident using this software now then I did back in school when I was learning. And the guy doing the voice over really is great at what he does</p>
-              </div>
-            </div>
+<!--                <div class="rating">-->
+<!--                  <a href="#"><i class="fa fa-star"></i></a>-->
+<!--                  <a href="#"><i class="fa fa-star"></i></a>-->
+<!--                  <a href="#"><i class="fa fa-star"></i></a>-->
+<!--                  <a href="#"><i class="fa fa-star"></i></a>-->
+<!--                  <a href="#"><i class="fa fa-star-half"></i></a>-->
+<!--                </div>-->
+<!--                <p>Great course. Well structured, paced and I feel far more confident using this software now then I did back in school when I was learning. And the guy doing the voice over really is great at what he does</p>-->
+<!--              </div>-->
+<!--            </div>-->
 
+            <app-single-review></app-single-review>
 
             <div class="course-review">
               <div class="profile-img">
@@ -179,8 +181,13 @@
                 </div>
                 <p>Very deep course for a beginner, enjoyed everything from the very start and every detail is vastly investigated and discussed. A nice choice for those, who are enrolling Python. </p>
               </div>
-
             </div>
+          </div>
+        </div>
+        <div class="course-widget course-info">
+          <h4 class="course-title">Submit a review!</h4>
+          <div class="course-review">
+            <app-review-form></app-review-form>
           </div>
         </div>
       </div>

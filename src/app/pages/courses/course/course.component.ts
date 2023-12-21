@@ -5,11 +5,13 @@ import {CoursesService} from "../../../services/courses.service";
 import {Course} from "../../../models/course.model";
 import {AuthService} from "../../../services/auth.service";
 import {UserDetails} from "../../../models/user.model";
+import {FormControl,FormGroup,ReactiveFormsModule} from "@angular/forms";
+import {SingleReviewService} from "../../../services/single-review.service";
 
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css']
+  styleUrls: ['./course.component.css'],
 })
 export class CourseComponent implements OnInit{
 
@@ -19,10 +21,12 @@ export class CourseComponent implements OnInit{
 
   loggedInUser: UserDetails | any;
 
+
   constructor(private courseService: CoursesService,
               private  router: ActivatedRoute,
               private singleCourseService: SingleCourseService,
               private authService: AuthService,
+              private singleReviewService: SingleReviewService,
               ) {
 
   }
@@ -32,6 +36,7 @@ export class CourseComponent implements OnInit{
     this.courseService.getCourseById(id).subscribe({
       next: result => {
         this.singleCourse = result;
+        this.singleReviewService.singleCourse = result;
         }
     });
     this.getLoggedUser();

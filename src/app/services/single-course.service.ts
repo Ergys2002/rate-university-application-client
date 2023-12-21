@@ -17,6 +17,7 @@ export class SingleCourseService {
 
   constructor(private http: HttpClient) { }
 
+
   isEnrolled(courseId:string,email:string){
       const data = {
         courseId : courseId,

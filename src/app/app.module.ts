@@ -21,6 +21,8 @@ import {LoginComponent} from "./pages/login/login.component";
 import {SignUpComponent} from "./pages/sign-up/sign-up.component";
 import {MyProfileComponent} from "./pages/my-profile/my-profile.component";
 import { ReviewsComponent } from './pages/reviews/reviews.component';
+import { SingleReviewComponent } from './pages/reviews/single-review/single-review.component';
+import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review-form.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { ReviewsComponent } from './pages/reviews/reviews.component';
     LecturerComponent,
     MyProfileComponent,
     ReviewsComponent,
+    SingleReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { ReviewsComponent } from './pages/reviews/reviews.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
+    ReviewFormComponent,
 
 
   ],

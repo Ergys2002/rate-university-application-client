@@ -1,0 +1,17 @@
+<form [formGroup]="applyForm"  (submit)="submitReview()" >
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Rate course</label>
+    <select class="form-control" id="exampleFormControlSelect1" formControlName="rating">
+      <option>5</option>
+      <option>4</option>
+      <option>3</option>
+      <option>2</option>
+      <option>1</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Review</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" formControlName="message"></textarea>
+  </div>
+  <button type="submit" class="btn btn-main btn-block" style="margin-top: 1rem;background-color: #fab231;border-color: #faf9ff;padding: 11px 15px ">Submit</button>
+</form>
