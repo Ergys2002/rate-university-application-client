@@ -35,11 +35,29 @@ export class SingleReviewService {
   }
 
   submitReview(rating:string,message:string,email:string){
-    console.log(rating);
-    console.log(message);
-    console.log(this.singleCourse.id + "CourseId");
-    console.log(email
-      + "LoginUser");
+    const data = {
+      courseId : this.singleCourse.id,
+      email : email,
+      rating: rating,
+      message: message
+    }
+    console.log(data);
+    const url =  environment.apiBaseUrl + "reviews/save-review";
+
+    this.http.post(url, data).subscribe(
+      (response) => {
+        console.log('Save review successful', response);
+        if (response == true){
+          alert("Review submited!");
+        }
+        else if (response == false){
+          alert("Failed to submit review!");
+        }
+      },
+      (error) => {
+        console.error('Error in post request', error);
+      }
+    );
   }
 
 }

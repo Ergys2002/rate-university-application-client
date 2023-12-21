@@ -47,11 +47,4 @@ export class ReviewFormComponent implements OnInit {
     );
   }
 
-  getLoggedUser() {
-    this.authService.loggedInUser().subscribe({
-      next: (result: UserDetails) => {
-        this.loggedInUser = result;
-      }
-    });
-  }
 }
