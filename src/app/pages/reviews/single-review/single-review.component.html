@@ -1,18 +1,70 @@
-<div class="course-review">
-  <div class="profile-img">
-    <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
-  </div>
-  <div class="review-text">
+<!--<div class="course-review">-->
+<!--  <div class="profile-img">-->
+<!--    <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">-->
+<!--  </div>-->
+<!--  <div class="review-text">-->
 
-    <h5>{{reviews|json}}  <span>26th june 2020</span></h5>
+<!--    <h5>{{reviews|json}}  <span>26th june 2020</span></h5>-->
 
-    <div class="rating">
-      <a href="#"><i class="fa fa-star"></i></a>
-      <a href="#"><i class="fa fa-star"></i></a>
-      <a href="#"><i class="fa fa-star"></i></a>
-      <a href="#"><i class="fa fa-star"></i></a>
-      <a href="#"><i class="fa fa-star-half"></i></a>
+<!--    <div class="rating">-->
+<!--      <a href="#"><i class="fa fa-star"></i></a>-->
+<!--      <a href="#"><i class="fa fa-star"></i></a>-->
+<!--      <a href="#"><i class="fa fa-star"></i></a>-->
+<!--      <a href="#"><i class="fa fa-star"></i></a>-->
+<!--      <a href="#"><i class="fa fa-star-half"></i></a>-->
+<!--    </div>-->
+<!--    <p>Great course. Well structured, paced and I feel far more confident using this software now then I did back in school when I was learning. And the guy doing the voice over really is great at what he does</p>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="course-widget course-info">
+  <h4 class="course-title">Students Feedback</h4>
+
+  <div class="course-review-wrapper">
+    <div class="course-review" *ngFor="let review of reviews | paginate: { itemsPerPage: 2, currentPage: p }">
+      <div class="profile-img">
+        <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
+      </div>
+      <div class="review-text">
+        <h5>Anonym Reviewer<span>{{review.createdAt}}</span></h5>
+        <div class="rating" [ngSwitch]="review.rating">
+          <div *ngSwitchCase="1">
+            <a href="#"><i class="fa fa-star"></i></a>
+          </div>
+          <div *ngSwitchCase="2">
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+          </div>
+          <div *ngSwitchCase="3">
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+          </div>
+          <div *ngSwitchCase="4">
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+          </div>
+          <div *ngSwitchCase="5">
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+            <a href="#"><i class="fa fa-star"></i></a>
+          </div>
+        </div>
+        <p>{{review.message}}</p>
+      </div>
     </div>
-    <p>Great course. Well structured, paced and I feel far more confident using this software now then I did back in school when I was learning. And the guy doing the voice over really is great at what he does</p>
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <!--        <nav class="blog-pagination text-center">-->
+        <ul>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </ul>
+        <!--        </nav>-->
+      </div>
+    </div>
   </div>
 </div>

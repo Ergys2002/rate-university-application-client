@@ -20,7 +20,7 @@ export class CoursesComponent implements OnInit{
     this.coursesService.getCoursePage().subscribe({
       next : (data: Course[]) => {
         this.pageOfCourses = data;
-        console.log(data)
+        console.log(data);
       }});
   }
 }

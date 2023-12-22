@@ -18,21 +18,14 @@ export class SingleReviewService {
   singleCourse!: Course;
 
   constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-    private  router: ActivatedRoute,
-    private courseService: CoursesService,
+    private http: HttpClient
   ) { }
 
-  getReviewsByCourseId(){
-    this.http.get(environment.apiBaseUrl + "reviews/c/" + this.singleCourse.id)
-      .subscribe(
-        (data)=>{
-          this.reviews = data;
-          console.log("INSIDE SINGLE REVIEW SERVIE : " + data);
-        }
-      )
-  }
+   getReviewByCourseId() {
+    console.log(this.singleCourse.id);
+     return this.http.get(
+       environment.apiBaseUrl + "reviews/c/" + this.singleCourse.id);
+   }
 
   submitReview(rating:string,message:string,email:string){
     const data = {
