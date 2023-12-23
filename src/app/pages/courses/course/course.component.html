@@ -124,19 +124,51 @@
               <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
             </div>
             <div class="profile-info">
-              <h5>Meraz Ahmed</h5>
-              <div class="rating">
-                <a href="#"><i class="fa fa-star"></i></a>
-                <a href="#"><i class="fa fa-star"></i></a>
-                <a href="#"><i class="fa fa-star"></i></a>
-                <a href="#"><i class="fa fa-star"></i></a>
-                <a href="#"><i class="fa fa-star-half"></i></a>
-                <span>3.79 ratings (29 )</span>
+              <h5>{{lecturer.firstName}} {{lecturer.lastName}}</h5>
+              <div class="rating" [ngSwitch]="lecturer.rating">
+                <div *ngSwitchCase="1">
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <span>{{lecturer.rating}}</span>
+                </div>
+                <div *ngSwitchCase="2">
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <span>{{lecturer.rating}}</span>
+                </div>
+                <div *ngSwitchCase="3">
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <span>{{lecturer.rating}}</span>
+                </div>
+                <div *ngSwitchCase="4">
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <span>{{lecturer.rating}}</span>
+                </div>
+                <div *ngSwitchCase="5">
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <span>{{lecturer.rating}}</span>
+                </div>
+                <div *ngSwitchDefault>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <a href="#"><i class="fa fa-star"></i></a>
+                  <span>{{lecturer.rating}}</span>
+                </div>
               </div>
-              <p>I'm a developer with a passion for teaching. I'm the lead instructor at the London App Brewery, London's leading Programming Bootcamp. I've helped hundreds of thousands of students learn to code and change their lives by becoming a developer </p>
+              <p>{{lecturer.description}}</p>
               <div class="instructor-courses">
-                <span><i class="bi bi-folder"></i>4 Courses</span>
-                <span><i class="bi bi-group"></i>400 Students</span>
+                <span><i class="bi bi-folder"></i>Email: {{lecturer.email}}</span>
+<!--                <span><i class="bi bi-group"></i>400 Students</span>-->
               </div>
             </div>
           </div>
@@ -185,12 +217,14 @@
 <!--          </div>-->
 <!--        </div>-->
         <app-single-review></app-single-review>
-        <div class="course-widget course-info">
-          <h4 class="course-title">Submit a review!</h4>
-          <div class="course-review">
-            <app-review-form></app-review-form>
+
+          <div class="course-widget course-info" >
+            <h4 class="course-title">Submit a review!</h4>
+            <div class="course-review">
+              <app-review-form></app-review-form>
+            </div>
           </div>
-        </div>
+
       </div>
 
       <div class="col-lg-4">
@@ -230,7 +264,7 @@
               <li>
                 <div class="d-flex justify-content-between align-items-center">
                   <span><i class="bi bi-user-ID"></i>Instructor :</span>
-                  <a href="#" class="d-inline-block">Jone Smit</a>
+                  <a href="#" class="d-inline-block">{{lecturer.firstName}} {{lecturer.lastName}}</a>
                 </div>
               </li>
 

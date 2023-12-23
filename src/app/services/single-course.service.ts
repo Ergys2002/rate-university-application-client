@@ -10,12 +10,16 @@ export class SingleCourseService {
 
   isStudentEnrolled:Object = false;
   noOfStudents : number = 0;
-
+  isEnrolledValidation :Object = false;
   public getIsStudentEnrolled(){
     return this.isStudentEnrolled;
   }
 
   constructor(private http: HttpClient) { }
+
+  getLecturerById(id : string){
+    return this.http.get(environment.apiBaseUrl + "lecturers/" + id);
+  }
 
 
   isEnrolled(courseId:string,email:string){
@@ -42,6 +46,7 @@ export class SingleCourseService {
       }
     );
   }
+
 
   enrollUser(email:string,courseId:string){
     const data = {

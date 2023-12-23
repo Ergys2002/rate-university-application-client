@@ -39,6 +39,7 @@ export class SingleReviewService {
 
     this.http.post(url, data).subscribe(
       (response) => {
+        window.location.reload();
         console.log('Save review successful', response);
         if (response == true){
           alert("Review submited!");

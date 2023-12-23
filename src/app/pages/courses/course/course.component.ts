@@ -7,6 +7,7 @@ import {AuthService} from "../../../services/auth.service";
 import {UserDetails} from "../../../models/user.model";
 import {FormControl,FormGroup,ReactiveFormsModule} from "@angular/forms";
 import {SingleReviewService} from "../../../services/single-review.service";
+import {Lecturer} from "../../../models/lecturer.model";
 
 @Component({
   selector: 'app-course',
@@ -21,6 +22,7 @@ export class CourseComponent implements OnInit{
 
   loggedInUser: UserDetails | any;
 
+  lecturer !: Lecturer;
 
   constructor(private courseService: CoursesService,
               private  router: ActivatedRoute,
@@ -37,9 +39,19 @@ export class CourseComponent implements OnInit{
       next: result => {
         this.singleCourse = result;
         this.singleReviewService.singleCourse = result;
+        this.getLecturerById();
         }
     });
     this.getLoggedUser();
+  }
+
+  getLecturerById(){
+      this.singleCourseService.getLecturerById(this.singleCourse.lecturerId).subscribe({
+        next :(data : Lecturer) => {
+          this.lecturer = data;
+          console.log("Lecturer "+data)
+        }}
+      )
   }
 
   getLoggedUser(){
@@ -58,6 +70,7 @@ export class CourseComponent implements OnInit{
     this.singleCourseService.isEnrolled(this.singleCourse.id,this.loggedInUser.email);
     this.isStudentEnrolled = this.singleCourseService.isStudentEnrolled;
   }
+
 
   dropOut(){
     this.singleCourseService.dropOutOfCourse(this.loggedInUser.email,this.singleCourse.id);
