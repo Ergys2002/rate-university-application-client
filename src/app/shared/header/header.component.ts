@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HomeComponent} from "../../pages/home/home.component";
 import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit{
 
   protected readonly HomeComponent = HomeComponent;
 
-
+constructor(private authService: AuthService , private router: Router) {
+}
 
   ngOnInit(): void {
     this.loggedIn = this.isTokenValid();
@@ -45,6 +47,11 @@ export class HeaderComponent implements OnInit{
 
     return day <= Number(expArray[2]) && month === Number(expArray[1]) && year === Number(expArray[0]);
 
+}
+
+logout(){
+    this.authService.clearUser();
+    this.router.navigateByUrl("/login")
 }
 
 

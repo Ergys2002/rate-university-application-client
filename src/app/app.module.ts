@@ -11,7 +11,7 @@ import { CourseComponent } from './pages/courses/course/course.component';
 import { LecturerComponent } from './pages/lecturers/lecturer/lecturer.component';
 import { AppRoutingModule } from './app-routing.module';
 import {RouterLink, RouterOutlet} from "@angular/router";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -20,6 +20,15 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {LoginComponent} from "./pages/login/login.component";
 import {SignUpComponent} from "./pages/sign-up/sign-up.component";
 import {MyProfileComponent} from "./pages/my-profile/my-profile.component";
+import {CommonModule} from "@angular/common";
+import { CalendarComponent } from './pages/course-schedule/calendar/calendar.component';
+import {FullCalendarModule} from "@fullcalendar/angular";
+import {DayGridView} from "@fullcalendar/daygrid/internal";
+
+
+
+
+
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { SingleReviewComponent } from './pages/reviews/single-review/single-review.component';
 import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review-form.component';
@@ -37,6 +46,7 @@ import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review
     CourseComponent,
     LecturerComponent,
     MyProfileComponent,
+    CalendarComponent,
     ReviewsComponent,
     SingleReviewComponent,
   ],
@@ -54,7 +64,9 @@ import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review
     BrowserAnimationsModule,
     NgxPaginationModule,
     ReviewFormComponent,
-
+    CommonModule,
+    NgbModalModule,
+    FullCalendarModule,
 
   ],
   providers: [
@@ -63,7 +75,7 @@ import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review
       useClass : AuthInterceptor,
       multi: true
     }
-  ],
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,8 +15,7 @@ export class LoginComponent implements OnInit{
 
   //todo fix ngOnInit
   ngOnInit() {
-      this.createLoginForm(); // If not logged in, create the login form
-
+      this.createLoginForm();
   }
 
   createLoginForm() {
@@ -30,6 +29,7 @@ export class LoginComponent implements OnInit{
     this.authService.login(this.loginForm.value).subscribe(
       (res: any) => {
         this.router.navigateByUrl('/home-page');
+
       });
 
   }

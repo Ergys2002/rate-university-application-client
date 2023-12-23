@@ -9,6 +9,7 @@ import {CourseComponent} from "./pages/courses/course/course.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {SignUpComponent} from "./pages/sign-up/sign-up.component";
 import {MyProfileComponent} from "./pages/my-profile/my-profile.component";
+import {CalendarComponent} from "./pages/course-schedule/calendar/calendar.component";
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'lecturer/:id', component: LecturerComponent},
   {path: 'lecturers', component: LecturersComponent},
   {path: 'my-profile', component: MyProfileComponent},
-  {path: 'course/:id', component: CourseComponent}
+  {path: 'course/:id', component: CourseComponent},
+  {path: 'courses-schedule', component: CalendarComponent}
 ]
 
 

@@ -24,7 +24,6 @@ export class AuthService {
           this.setUser(result)
           return result;
         }
-
         throw new Error("Could not login");
       }));
   }

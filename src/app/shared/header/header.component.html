@@ -32,11 +32,17 @@
                 Lecturers
               </a>
             </li>
+            <li *ngIf="loggedIn" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle px-1" [routerLink]="'/courses-schedule'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Schedule
+              </a>
+            </li>
 
           </ul>
 
           <a [routerLink]="'/login'" *ngIf="!loggedIn" class="btn btn-main btn-small"><i class="fa fa-sign-in-alt mr-2"></i>Login</a>
-          <a [routerLink]="'/my-profile'" *ngIf="loggedIn"><i class="fa-regular fa-user fa-lg" style="color: #ffffff;"></i></a>
+          <a [routerLink]="'/my-profile'" *ngIf="loggedIn"><i class="fa-regular fa-user mx-3 fa-lg" style="color: #ffffff;"></i></a>
+          <a (click)="logout()" *ngIf="loggedIn" class="btn btn-primary mx-3 logout py-2 px-3">Logout</a>
 
         </div> <!-- / .navbar-collapse -->
       </div> <!-- / .container -->

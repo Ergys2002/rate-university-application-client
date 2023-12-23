@@ -5,7 +5,6 @@ export interface Course{
   title: string;
   lecturerId: string;
   totalQuotes: number;
-  freeQuotes: number
   courseRating : number;
   startDate: Date;
   endDate: Date;
