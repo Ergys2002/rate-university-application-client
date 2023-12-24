@@ -9,4 +9,5 @@ export interface Course{
   startDate: Date;
   endDate: Date;
   enrolledStudents:number
+  picture: string;
 }

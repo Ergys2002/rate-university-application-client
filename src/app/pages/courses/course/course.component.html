@@ -1,46 +1,6 @@
 <app-header></app-header>
-<!--search overlay start-->
-<div class="search-wrap">
-  <div class="overlay">
-    <form action="" class="search-form">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-10 col-9">
-            <h3>Search Your keyword</h3>
-            <input type="text" class="form-control" placeholder="Search..."/>
-          </div>
-          <div class="col-md-2 col-3 text-right">
-            <div class="search_toggle toggle-wrap d-inline-block">
-              <img class="search-close" src="../assets/img/upt-image.jpg" srcset="assets/images/close@2x.png 2x" alt="FOTO"/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-<!--search overlay end-->
-
 
 <section class="page-header" style="padding: 49px 0px">
-<!--  <div class="container">-->
-<!--    <div class="row justify-content-center">-->
-<!--      <div class="col-lg-8">-->
-<!--        <div class="page-header-content">-->
-<!--          <h1>Course Single</h1>-->
-<!--          <ul class="list-inline mb-0">-->
-<!--            <li class="list-inline-item">-->
-<!--              <a href="#">Home</a>-->
-<!--            </li>-->
-<!--            <li class="list-inline-item">/</li>-->
-<!--            <li class="list-inline-item">-->
-<!--              Courses-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
 </section>
 
 <section class="page-wrapper edutim-course-single">
@@ -48,14 +8,9 @@
     <div class="row">
       <div class="col-lg-8">
         <div class="course-single-header">
-          <div class="rating">
-<!--            <a href="#"><i class="fa fa-star"></i></a>-->
-<!--            <a href="#"><i class="fa fa-star"></i></a>-->
-<!--            <a href="#"><i class="fa fa-star"></i></a>-->
-<!--            <a href="#"><i class="fa fa-star"></i></a>-->
-<!--            <a href="#"><i class="fa fa-star"></i></a>-->
-            <span *ngIf="singleCourse.courseRating >= 0"> <i class="fa-regular fa-bookmark"></i> Course Rating: {{singleCourse.courseRating}} / 5</span>
-            <span *ngIf="singleCourse.courseRating < 0"> <i class="fa-regular fa-bookmark"></i> Course Rating: Not Rated Yet</span>
+          <div class="rating" *ngIf="singleCourse.courseRating >= 1">
+            <i class="fa fa-star" *ngFor="let i of starArray"></i>
+            <div><i class="fa-regular fa-bookmark"></i> Course Rating: {{singleCourse.courseRating}} / 5</div>
           </div>
 
           <h3 class="single-course-title">{{singleCourse.title}}</h3>

@@ -21,8 +21,13 @@
         <!-- Loop through the lecturers and display each one -->
         <div class="col-lg-4 col-md-6" *ngFor="let lecturer of lecturers | paginate: { itemsPerPage: 6, currentPage: p }">
           <div class="team-block">
-            <div class="team-img">
-              <img src="./assets/img/upt-image.jpg" alt="{{ lecturer.firstName }} {{ lecturer.lastName }}" class="img-fluid">
+            <div class="team-img" style="height: 60vh; box-shadow: 10px 5px 5px #d2d1d1;">
+              <img
+                [src]="'http://localhost:8080/img/lecturers/' + lecturer.profilePicture"
+                alt="{{ lecturer.firstName }} {{ lecturer.lastName }}"
+                class="img-fluid img-hover"
+                style="height: 100%; width: 100%; object-fit: cover;"
+              >
             </div>
             <div class="team-info">
               <h4> <a [routerLink]="'/lecturer/'+lecturer.id">{{ lecturer.firstName }} {{ lecturer.lastName }} </a></h4>

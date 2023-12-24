@@ -45,6 +45,9 @@ export class CourseComponent implements OnInit{
     this.getLoggedUser();
   }
 
+  get starArray() {
+    return Array(this.singleCourse.courseRating).fill(0).map((_, index) => index);
+  }
   getLecturerById(){
       this.singleCourseService.getLecturerById(this.singleCourse.lecturerId).subscribe({
         next :(data : Lecturer) => {

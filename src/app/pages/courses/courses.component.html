@@ -53,10 +53,15 @@
 
   <div class="container">
     <div class="row">
-        <div class="col-lg-4 col-md-6" *ngFor="let course of pageOfCourses | paginate: { itemsPerPage: 6, currentPage: p }">
+        <div class="col-lg-4 col-md-6 my-3" *ngFor="let course of pageOfCourses | paginate: { itemsPerPage: 6, currentPage: p }" style="box-shadow: 10px 5px 5px #d2d1d1;">
           <div class="course-block course-style-2">
-            <div class="course-img">
-              <img src="../../../assets/img/upt-image.jpg" alt="" class="img-fluid">
+            <div class="course-img" style="height: 40vh; ">
+              <img
+                [src]="'http://localhost:8080/img/courses/' + course.picture"
+                alt=""
+                class="img-fluid"
+                style="height: 100%; width: 100%; object-fit: contain; border: 1px solid #e1e0e0"
+              >
               <span class="course-cat" *ngIf="course.available; else elseBlock">
                   Available
               </span>
@@ -73,8 +78,10 @@
 
               <div class="course-footer d-lg-flex align-items-center justify-content-between">
                 <div class="course-meta">
-                  <span class="course-student"><i class="bi bi-group fa-regular fa-bookmark"></i>Rating:
-                    {{course.courseRating}} / 100 %</span>
+                  <span *ngIf="course.courseRating >= 1" class="course-student"><i class="bi bi-group fa-regular fa-bookmark"></i>Rating:
+                    {{course.courseRating}} / 5</span>
+                  <span *ngIf="course.courseRating < 1" class="course-student"><i class="bi bi-group fa-regular fa-bookmark"></i>Rating:
+                    - </span>
                 </div>
 
                 <div><span class="course-price">{{course.totalQuotes - course.enrolledStudents}}</span> free quotes </div>
@@ -100,23 +107,5 @@
   <a href="#top-header" class="js-scroll-trigger scroll-to-top"><i class="fa fa-angle-up"></i></a>
 </div>
 
-
-
-<!--
-Essential Scripts
-=====================================-->
-
-<!-- Main jQuery -->
-<script src="assets/vendors/jquery/jquery.js"></script>
-<!-- Bootstrap 4.5 -->
-<script src="assets/vendors/bootstrap/bootstrap.js"></script>
-<!-- Counterup -->
-<script src="assets/vendors/counterup/waypoint.js"></script>
-<script src="assets/vendors/counterup/jquery.counterup.min.js"></script>
-<script src="assets/vendors/jquery.isotope.js"></script>
-<script src="assets/vendors/imagesloaded.js"></script>
-<!--  Owlk Carousel-->
-<script src="assets/vendors/owl/owl.carousel.min.js"></script>
-<script src="assets/js/script.js"></script>
 
 

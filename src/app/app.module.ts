@@ -20,18 +20,15 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {LoginComponent} from "./pages/login/login.component";
 import {SignUpComponent} from "./pages/sign-up/sign-up.component";
 import {MyProfileComponent} from "./pages/my-profile/my-profile.component";
-import {CommonModule} from "@angular/common";
+import {CommonModule, NgOptimizedImage, NgTemplateOutlet} from "@angular/common";
 import { CalendarComponent } from './pages/course-schedule/calendar/calendar.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
-import {DayGridView} from "@fullcalendar/daygrid/internal";
-
-
-
-
-
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { SingleReviewComponent } from './pages/reviews/single-review/single-review.component';
 import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review-form.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { PopupComponent } from './shared/popup/popup.component';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +46,7 @@ import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review
     CalendarComponent,
     ReviewsComponent,
     SingleReviewComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +65,9 @@ import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review
     CommonModule,
     NgbModalModule,
     FullCalendarModule,
-
+    NgTemplateOutlet,
+    MatSnackBarModule,
+    NgOptimizedImage
   ],
   providers: [
     {

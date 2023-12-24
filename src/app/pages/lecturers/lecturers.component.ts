@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {Lecturer} from "../../models/lecturer.model";
 import {HomePageService} from "../../services/home-page.service";
 import {LecturerService} from "../../services/lecturer.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-lecturers',
@@ -48,4 +49,6 @@ export class LecturersComponent {
 
 
   }
+
+  protected readonly environment = environment;
 }

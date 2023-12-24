@@ -24,7 +24,7 @@ export class SingleReviewService {
    getReviewByCourseId() {
     console.log(this.singleCourse.id);
      return this.http.get(
-       environment.apiBaseUrl + "reviews/c/" + this.singleCourse.id);
+       environment.apiBaseUrl + "reviews/course-reviews/" + this.singleCourse.id);
    }
 
   submitReview(rating:string,message:string,email:string){
