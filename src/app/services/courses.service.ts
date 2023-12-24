@@ -19,6 +19,9 @@ export class CoursesService {
     return this.http.get<Course>(environment.apiBaseUrl + "courses/details?id=" + id)
   }
 
+  getTopRatedCourse(){
+    return this.http.get(environment.apiBaseUrl + "courses/get-top-rated-courses")
+  }
 
   getAllCoursesOfAuthenticatedUser () : Observable<Course[]>{
     return this.http.get<Course[]>(environment.apiBaseUrl + "courses/courses-of-authenticated-user")

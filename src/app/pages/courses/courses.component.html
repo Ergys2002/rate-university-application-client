@@ -29,12 +29,14 @@
   </div>
 </section>
 
+<!--8 top rated Course Section-->
+
 <section class="section-padding course">
   <div class="course-top-wrap">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-8">
-          <p>Showing 1-6 of 8 results</p>
+          <p>Top rated Courses</p>
         </div>
 
         <div class="col-lg-4">
@@ -44,6 +46,71 @@
               <label><i class="fa fa-search"></i></label>
             </form>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  COURSES CARDS-->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 my-3" *ngFor="let topRatedCourse of topRatedCourses | paginate: { itemsPerPage: 3, currentPage: t }" style="box-shadow: 10px 5px 5px #d2d1d1;">
+        <div class="course-block course-style-2">
+          <div class="course-img" style="height: 40vh; ">
+            <img
+              [src]="'http://localhost:8080/img/courses/' + topRatedCourse.picture"
+              alt=""
+              class="img-fluid"
+              style="height: 100%; width: 100%; object-fit: contain; border: 1px solid #e1e0e0"
+            >
+            <span class="course-cat" *ngIf="topRatedCourse.available; else elseBlock">
+                  Available
+              </span>
+            <ng-template #elseBlock>
+                <span class="course-cat">
+                  Course Not Available
+                </span>
+            </ng-template>
+          </div>
+
+          <div class="course-content">
+            <h4><a [routerLink]="'/course/'+topRatedCourse.id">{{topRatedCourse.title}}</a></h4>
+            <p>{{topRatedCourse.description}}</p>
+
+            <div class="course-footer d-lg-flex align-items-center justify-content-between">
+              <div class="course-meta">
+                  <span *ngIf="topRatedCourse.courseRating >= 1" class="course-student"><i class="bi bi-group fa-regular fa-bookmark"></i>Rating:
+                    {{topRatedCourse.courseRating}} / 5</span>
+                <span *ngIf="topRatedCourse.courseRating < 1" class="course-student"><i class="bi bi-group fa-regular fa-bookmark"></i>Rating:
+                    - </span>
+              </div>
+
+              <div><span class="course-price">{{topRatedCourse.totalQuotes - topRatedCourse.enrolledStudents}}</span> free quotes </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <!--        <nav class="blog-pagination text-center">-->
+        <ul>
+          <pagination-controls (pageChange)="t = $event"></pagination-controls>
+        </ul>
+        <!--        </nav>-->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding course">
+  <div class="course-top-wrap">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <p>All Courses</p>
         </div>
       </div>
     </div>
