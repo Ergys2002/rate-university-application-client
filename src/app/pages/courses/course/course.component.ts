@@ -24,6 +24,8 @@ export class CourseComponent implements OnInit{
 
   lecturer !: Lecturer;
 
+  averageRating !: any;
+
   constructor(private courseService: CoursesService,
               private  router: ActivatedRoute,
               private singleCourseService: SingleCourseService,
@@ -40,9 +42,19 @@ export class CourseComponent implements OnInit{
         this.singleCourse = result;
         this.singleReviewService.singleCourse = result;
         this.getLecturerById();
+        this.getAverageRating();
         }
     });
     this.getLoggedUser();
+  }
+
+  getAverageRating(){
+    this.singleCourseService.getAverageRating(this.singleCourse.id).subscribe(
+      {
+        next: value => this.averageRating = value
+      }
+    )
+    console.log("GetAverageRating")
   }
 
   get starArray() {

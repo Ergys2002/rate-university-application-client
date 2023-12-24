@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {Course} from "../models/course.model";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +20,10 @@ export class SingleCourseService {
 
   getLecturerById(id : string){
     return this.http.get(environment.apiBaseUrl + "lecturers/" + id);
+  }
+
+  getAverageRating(courseId: string){
+    return this.http.get(environment.apiBaseUrl + "reviews/get-average-rating/" + courseId);
   }
 
 
