@@ -11,12 +11,22 @@
                   <label>Firstname<span class="required">*</span></label>
                   <input type="email" class="woocommerce-Input woocommerce-Input--text input-text form-control"
                          name="user-name" id="firstname" autocomplete="user-name" value="" formControlName="firstname">
+                  <ng-container *ngIf="signUpForm.get('firstname') as firstname">
+                    <div *ngIf="firstname.valid">
+                      <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                    </div>
+                  </ng-container>
                 </p>
                 <p class="col-md-1"></p>
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide col-md-5 px-0">
                   <label>Lastname<span class="required">*</span></label>
                   <input type="email" class="woocommerce-Input woocommerce-Input--text input-text form-control"
                          name="user-name" id="lastname" autocomplete="user-name" value="" formControlName="lastname">
+                  <ng-container *ngIf="signUpForm.get('lastname') as lastname">
+                    <div *ngIf="lastname.valid">
+                      <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                    </div>
+                  </ng-container>
                 </p>
               </div>
             </div>
@@ -24,21 +34,41 @@
               <label>Email address&nbsp;<span class="required">*</span></label>
               <input type="email" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="email"
                      id="email" autocomplete="email" value="" formControlName="email">
+              <ng-container *ngIf="signUpForm.get('email') as email">
+                <div *ngIf="email.valid">
+                  <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                </div>
+              </ng-container>
             </p>
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
               <label>Password&nbsp;<span class="required">*</span></label>
               <input type="password" class="woocommerce-Input woocommerce-Input--text input-text form-control"
                      name="password" id="password" autocomplete="password" value="" formControlName="password">
+              <ng-container *ngIf="signUpForm.get('password') as password">
+                <div *ngIf="password.valid">
+                  <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                </div>
+              </ng-container>
             </p>
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
               <label>Birth Date<span class="required">*</span></label>
               <input type="date" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="email"
                      id="birthDate" autocomplete="date" value="" formControlName="birthDate">
+              <ng-container *ngIf="signUpForm.get('birthDate') as birthDate">
+                <div *ngIf="birthDate.valid">
+                  <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                </div>
+              </ng-container>
             </p>
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
               <label>Phone number<span class="required">*</span></label>
               <input type="tel" class="woocommerce-Input woocommerce-Input--text input-text form-control" name="phone-number"
                      id="phoneNumber" autocomplete="tel" value="" formControlName="phoneNumber">
+              <ng-container *ngIf="signUpForm.get('phoneNumber') as phoneNumber">
+                <div *ngIf="phoneNumber.valid">
+                  <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                </div>
+              </ng-container>
             </p>
             <p class="woocommerce-FormRow form-row">
               <input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="b1c661ab82"><input

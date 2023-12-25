@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {SweetAlertService} from "../../services/sweet-alert.service";
 
 
 @Component({
@@ -14,7 +15,7 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private swal: SweetAlertService) { }
 
   //todo fix ngOnInit
   ngOnInit() {
@@ -30,13 +31,12 @@ export class LoginComponent implements OnInit{
 
   onSubmit() {
     this.authService.login(this.loginForm.value).subscribe({
-      next: result => {this.router.navigateByUrl("/home-page")},
-      error : err => { this.snackBar.open("Invalid Email or Password", 'Close', {
-        duration: 3000,
-        horizontalPosition : 'end',
-        verticalPosition : 'top',
-        panelClass: ['bg-danger']
-      });
+      next: result => {
+        this.swal.successNotification("Login", "Logged in succesfully")
+        setTimeout(() => {
+          this.router.navigateByUrl('/home-page');
+        }, 1000);      },
+      error : err => {this.swal.failNotification("Login", "Invalid Credentials")
       }
     })
 
