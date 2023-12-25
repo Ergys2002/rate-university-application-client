@@ -11,8 +11,9 @@ import {Course} from "../../models/course.model";
 })
 export class CoursesComponent implements OnInit{
   p : number = 1;
+  t : number = 1;
   pageOfCourses: Course[] = [];
-
+  topRatedCourses: any;
   constructor(private coursesService:CoursesService,private singleCourseService:SingleCourseService, private router: Router) {
   }
 
@@ -22,5 +23,12 @@ export class CoursesComponent implements OnInit{
         this.pageOfCourses = data;
         console.log(data);
       }});
+
+    this.coursesService.getTopRatedCourse().subscribe({
+      next : (data) => {
+        this.topRatedCourses = data;
+        console.log("Top Rated Courses");
+      }
+    })
   }
 }

@@ -22,7 +22,8 @@ const routes: Routes = [
   {path: 'lecturers', component: LecturersComponent},
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'course/:id', component: CourseComponent},
-  {path: 'courses-schedule', component: CalendarComponent}
+  {path: 'courses-schedule', component: CalendarComponent},
+
 ]
 
 

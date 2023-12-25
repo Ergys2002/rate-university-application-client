@@ -24,6 +24,8 @@ export class CourseComponent implements OnInit{
 
   lecturer !: Lecturer;
 
+  averageRating !: any;
+
   constructor(private courseService: CoursesService,
               private  router: ActivatedRoute,
               private singleCourseService: SingleCourseService,
@@ -40,11 +42,24 @@ export class CourseComponent implements OnInit{
         this.singleCourse = result;
         this.singleReviewService.singleCourse = result;
         this.getLecturerById();
+        this.getAverageRating();
         }
     });
     this.getLoggedUser();
   }
 
+  getAverageRating(){
+    this.singleCourseService.getAverageRating(this.singleCourse.id).subscribe(
+      {
+        next: value => this.averageRating = value
+      }
+    )
+    console.log("GetAverageRating")
+  }
+
+  get starArray() {
+    return Array(this.singleCourse.courseRating).fill(0).map((_, index) => index);
+  }
   getLecturerById(){
       this.singleCourseService.getLecturerById(this.singleCourse.lecturerId).subscribe({
         next :(data : Lecturer) => {
@@ -69,12 +84,21 @@ export class CourseComponent implements OnInit{
   isEnrolled(){
     this.singleCourseService.isEnrolled(this.singleCourse.id,this.loggedInUser.email);
     this.isStudentEnrolled = this.singleCourseService.isStudentEnrolled;
+    return this.isStudentEnrolled;
+  }
+
+  enrollUser(){
+    if (!this.isEnrolled()){
+      this.singleCourseService.enrollUser(this.loggedInUser.email,this.singleCourse.id);
+      this.ngOnInit();
+    }else {
+      console.log("Enroll user error course.component.ts");
+    }
   }
 
 
   dropOut(){
     this.singleCourseService.dropOutOfCourse(this.loggedInUser.email,this.singleCourse.id);
   }
-
 
 }
