@@ -7,6 +7,7 @@ import {Course} from "../models/course.model";
 import {ActivatedRoute} from "@angular/router";
 import {SingleCourseService} from "./single-course.service";
 import {CoursesService} from "./courses.service";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: 'root'
@@ -39,19 +40,37 @@ export class SingleReviewService {
 
     this.http.post(url, data).subscribe(
       (response) => {
-        window.location.reload();
+          this.Notification("Save Review","You just reviewed our course!","success");
+          setTimeout(() => {
+              window.location.reload();
+          }, 2000);
         console.log('Save review successful', response);
-        if (response == true){
-          alert("Review submited!");
-        }
-        else if (response == false){
-          alert("Failed to submit review!");
-        }
       },
-      (error) => {
-        console.error('Error in post request', error);
-      }
+        (error) => {
+            if (error.status === 409) {
+                this.Notification("Save Review","You have reviewed this course before!","error");
+                console.log('HTTP Status: Conflict (409)');
+                // Handle Forbidden error
+            } else if (error.status === 406) {
+                this.Notification("Save Review","Only enrolled students can submit a review","info");
+                console.log('HTTP Status: Not Acceptable (406)');
+                // Handle Not Acceptable error
+            } else {
+                console.log('Other HTTP Status:', error.status);
+                // Handle other errors if needed
+            }
+        }
     );
   }
+
+    Notification(title:string,message:string,type ?: string) {
+        if (type === undefined) {
+            // @ts-ignore
+            Swal.call('Info', title, message,'success');
+        }
+        // @ts-ignore
+        Swal.call('Info', title, message,type);
+    }
+
 
 }
