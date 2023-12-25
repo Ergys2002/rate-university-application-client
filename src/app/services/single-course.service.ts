@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {Course} from "../models/course.model";
 import Swal from 'sweetalert2';
+import {SweetAlertService} from "./sweet-alert.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,9 @@ import Swal from 'sweetalert2';
 export class SingleCourseService {
 
   isStudentEnrolled:Object = false;
-  noOfStudents : number = 0;
-  isEnrolledValidation :Object = false;
-  public getIsStudentEnrolled(){
-    return this.isStudentEnrolled;
-  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+  ,private sweetAlertService:SweetAlertService) { }
 
   getLecturerById(id : string){
     return this.http.get(environment.apiBaseUrl + "lecturers/" + id);
@@ -38,13 +35,10 @@ export class SingleCourseService {
       (response) => {
         console.log('Post request successful', response);
         if (response == true){
-            this.successNotification("Enroll Request","You are already enrolled in this Course");
+            this.sweetAlertService.successNotification("Enroll Request","You are already enrolled in this Course")
         }
-        // else if (response == false){
-        //   this.enrollUser(email,courseId);
-        // }
         else {
-            this.successNotification("Enroll Request","You are not enrolled in this course!");
+            this.sweetAlertService.successNotification("Enroll Request","You are not enrolled in this course!");
         }
         this.isStudentEnrolled = response;
       },
@@ -53,7 +47,6 @@ export class SingleCourseService {
       }
     );
   }
-
 
   enrollUser(email:string,courseId:string){
     const data = {
@@ -64,7 +57,7 @@ export class SingleCourseService {
 
     this.http.post(url, data).subscribe(
       (response) => {
-          this.successNotification("Enroll Request","You enrolled in this course!");
+          this.sweetAlertService.successNotification("Enroll Request","You enrolled in this course!");
           setTimeout(() => {
               // Reload the window
               window.location.reload();
@@ -77,15 +70,6 @@ export class SingleCourseService {
     );
   }
 
-  getEnrolledStudents(courseId:string){
-    this.http.get(environment.apiBaseUrl + "courses/enrolled-students/" + courseId)
-      .subscribe(
-        (data)=>{
-          this.noOfStudents = Object.keys(data).length;
-        }
-      )
-  }
-
   dropOutOfCourse(email:string,courseId:string){
     const data = {
       email : email,
@@ -95,7 +79,7 @@ export class SingleCourseService {
 
     this.http.post(url, data).subscribe(
       (response) => {
-        this.successNotification("Course Dropout","You dropped out of course");
+          this.sweetAlertService.successNotification("Course Dropout","You dropped out of course");
           setTimeout(() => {
               // Reload the window
               window.location.reload();
@@ -107,10 +91,4 @@ export class SingleCourseService {
       }
     );
   }
-
-    successNotification(title:string,message:string) {
-        // @ts-ignore
-        Swal.call('Info', title, message,'success');
-    }
-
 }

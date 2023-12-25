@@ -8,6 +8,7 @@ import {ActivatedRoute} from "@angular/router";
 import {SingleCourseService} from "./single-course.service";
 import {CoursesService} from "./courses.service";
 import Swal from "sweetalert2";
+import {SweetAlertService} from "./sweet-alert.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class SingleReviewService {
   singleCourse!: Course;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private sweetAlertService:SweetAlertService
   ) { }
 
    getReviewByCourseId() {
@@ -40,7 +42,7 @@ export class SingleReviewService {
 
     this.http.post(url, data).subscribe(
       (response) => {
-          this.Notification("Save Review","You just reviewed our course!","success");
+          this.sweetAlertService.successNotification("Save Review","You just reviewed our course!");
           setTimeout(() => {
               window.location.reload();
           }, 2000);
@@ -48,11 +50,11 @@ export class SingleReviewService {
       },
         (error) => {
             if (error.status === 409) {
-                this.Notification("Save Review","You have reviewed this course before!","error");
+                this.sweetAlertService.failNotification("Save Review","You have reviewed this course before!");
                 console.log('HTTP Status: Conflict (409)');
                 // Handle Forbidden error
             } else if (error.status === 406) {
-                this.Notification("Save Review","Only enrolled students can submit a review","info");
+                this.sweetAlertService.infoNotification("Save Review","Only enrolled students can submit a review");
                 console.log('HTTP Status: Not Acceptable (406)');
                 // Handle Not Acceptable error
             } else {
@@ -62,15 +64,4 @@ export class SingleReviewService {
         }
     );
   }
-
-    Notification(title:string,message:string,type ?: string) {
-        if (type === undefined) {
-            // @ts-ignore
-            Swal.call('Info', title, message,'success');
-        }
-        // @ts-ignore
-        Swal.call('Info', title, message,type);
-    }
-
-
 }

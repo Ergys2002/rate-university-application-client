@@ -27,4 +27,14 @@ export class SweetAlertService {
       showConfirmButton: false // Hide the "OK" button
     });
   }
+
+  infoNotification(title: string, message: string) {
+    Swal.fire({
+      title: title,
+      text: message,
+      icon: 'info',
+      timer: 1000, // Auto close after 3 seconds
+      showConfirmButton: false // Hide the "OK" button
+    });
+  }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from "../environments/environment";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Course} from "../models/course.model";
+import {SweetAlertService} from "./sweet-alert.service";
 
 @Injectable({
   providedIn: 'root'
