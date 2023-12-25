@@ -7,6 +7,8 @@ import {Course} from "../models/course.model";
 import {ActivatedRoute} from "@angular/router";
 import {SingleCourseService} from "./single-course.service";
 import {CoursesService} from "./courses.service";
+import {Observable} from "rxjs";
+import {ReviewModel} from "../models/review.model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,11 @@ export class SingleReviewService {
    getReviewByCourseId() {
     console.log(this.singleCourse.id);
      return this.http.get(
-       environment.apiBaseUrl + "reviews/c/" + this.singleCourse.id);
+       environment.apiBaseUrl + "reviews/course-reviews/" + this.singleCourse.id);
+   }
+
+   getReviewsByUserEmail () : Observable<ReviewModel[]>{
+    return this.http.get<ReviewModel[]>(environment.apiBaseUrl + "reviews/user-reviews");
    }
 
   submitReview(rating:string,message:string,email:string){

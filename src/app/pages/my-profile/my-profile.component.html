@@ -13,7 +13,7 @@
               <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar">
             </div>
             <h5 class="mb-1 text-white">{{loggedInUser.firstName}}</h5>
-            <h6 class="text-light">UI/UX Engineer</h6>
+            <h6 class="text-light">{{ loggedInUser.lastName }}</h6>
           </div>
           <div class="card-body">
             <ul class="list-group shadow-none">
@@ -51,7 +51,7 @@
         <div class="card-body">
           <ul class="nav nav-pills nav-pills-primary nav-justified">
             <li class="nav-item">
-              <a  (click)="setActiveTab('courses')" class="nav-link" [class.active]="activeTab === 'courses'"><i class="icon-user"></i> <span class="hidden-xs">Courses</span></a>
+              <a  (click)="setActiveTab('courses')" class="nav-link" [class.active]="activeTab === 'courses'"><i class="icon-user"></i> <span class="hidden-xs">My Courses</span></a>
             </li>
             <li class="nav-item">
               <a  (click)="setActiveTab('reviews')" class="nav-link" [class.active]="activeTab === 'reviews'"><i class="icon-envelope-open"></i> <span class="hidden-xs">My Reviews</span></a>
@@ -90,7 +90,7 @@
                           </span>
                           <br>
                           <span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
-                          Free quotes:    {{ course.enrolledStudents }}
+                          Enrolled Students:    {{ course.enrolledStudents }}
                           </span>
                         </div>
                       </div>
@@ -105,28 +105,71 @@
             </div>
 
             <div class="tab-pane" *ngIf="activeTab === 'reviews'">
-
+              <div class="course-review-wrapper">
+                <div class="course-review" *ngFor="let review of reviewsOfAuthenticatedUser">
+                  <div class="profile-img">
+                    <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
+                  </div>
+                  <div class="review-text">
+                    <div class="rating" [ngSwitch]="review.rating">
+                      <div *ngSwitchCase="1">
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </div>
+                      <div *ngSwitchCase="2">
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </div>
+                      <div *ngSwitchCase="3">
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </div>
+                      <div *ngSwitchCase="4">
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </div>
+                      <div *ngSwitchCase="5">
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
+                      </div>
+                    </div>
+                    <p>{{review.message}}</p>
+                  </div>
+                </div>
+              </div>
             </div>
+
 
             <div class="tab-pane" *ngIf="activeTab === 'edit'">
               <p>This is the Edit tab. Add your edit-related content here.</p>
-              <form>
+              <form [formGroup]="applyForm" (ngSubmit)="submitUpdatedUser()">
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">First name</label>
                   <div class="col-lg-9">
-                    <input class="form-control" type="text" value="Mark">
+                    <input class="form-control" type="text" formControlName="firstname" [(ngModel)]="loggedInUser.firstName">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                   <div class="col-lg-9">
-                    <input class="form-control" type="text" value="Jhonsan">
+                    <input class="form-control" type="text" formControlName="lastname" [(ngModel)]="loggedInUser.lastName">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Email</label>
                   <div class="col-lg-9">
-                    <input class="form-control" type="email" value="mark@example.com">
+                    <input class="form-control" type="email"  formControlName="email" [(ngModel)]="loggedInUser.email">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
+                  <div class="col-lg-9">
+                    <input class="form-control" type="email" formControlName="phoneNumber" [(ngModel)]="loggedInUser.phoneNumber">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -139,20 +182,19 @@
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Password</label>
                   <div class="col-lg-9">
-                    <input class="form-control" type="password" value="11111122333">
+                    <input class="form-control" type="password" value="" formControlName="password" >
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
                   <div class="col-lg-9">
-                    <input class="form-control" type="password" value="11111122333">
+                    <input class="form-control" type="password" value="" formControlName="confirmPassword">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label"></label>
                   <div class="col-lg-9">
-                    <input type="reset" class="btn btn-secondary" value="Cancel">
-                    <input type="button" class="btn btn-primary" value="Save Changes">
+                    <input type="button" type="submit" class="btn btn-primary" value="Save Changes" >
                   </div>
                 </div>
               </form>

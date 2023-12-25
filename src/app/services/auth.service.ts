@@ -20,11 +20,25 @@ export class AuthService {
     return this.httpClient
       .post<User>(environment.apiBaseUrl + "user/login", request)
       .pipe(map(result => {
+        console.log(result)
         if(result) {
           this.setUser(result)
           return result;
         }
         throw new Error("Could not login");
+      }));
+  }
+
+  update(request: UserSignIn){
+    return this.httpClient
+      .put<User>(environment.apiBaseUrl + "user/update-profile", request)
+      .pipe(map(result => {
+        console.log(result)
+        if(result) {
+          this.setUser(result)
+          return result;
+        }
+        throw new Error("Could not update");
       }));
   }
 
@@ -63,5 +77,35 @@ export class AuthService {
 
   loggedInUser() :  Observable<UserDetails>{
     return this.httpClient.get<UserDetails>(environment.apiBaseUrl + "user/logged-in-user")
+  }
+
+
+  submitUpdatedUser(firstname:string, lastname:string, email:string, password:string, phoneNumber:string){
+
+    const data = {
+      firstname: firstname,
+      lastname: lastname,
+      email : email,
+      password : password,
+      phoneNumber : phoneNumber
+    }
+
+    const url =  environment.apiBaseUrl + "user/update-profile";
+
+    this.httpClient.put(url, data).subscribe(
+      (response) => {
+
+        if (response == true){
+          alert("UserUpdate request submited!");
+        }
+        else if (response == false){
+          alert("Failed to submit review!");
+        }
+      },
+      (error) => {
+        console.error('Error in put request', error);
+      }
+
+    );
   }
 }
