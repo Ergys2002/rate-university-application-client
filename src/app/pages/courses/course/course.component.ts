@@ -84,12 +84,21 @@ export class CourseComponent implements OnInit{
   isEnrolled(){
     this.singleCourseService.isEnrolled(this.singleCourse.id,this.loggedInUser.email);
     this.isStudentEnrolled = this.singleCourseService.isStudentEnrolled;
+    return this.isStudentEnrolled;
+  }
+
+  enrollUser(){
+    if (!this.isEnrolled()){
+      this.singleCourseService.enrollUser(this.loggedInUser.email,this.singleCourse.id);
+      this.ngOnInit();
+    }else {
+      console.log("Enroll user error course.component.ts");
+    }
   }
 
 
   dropOut(){
     this.singleCourseService.dropOutOfCourse(this.loggedInUser.email,this.singleCourse.id);
   }
-
 
 }

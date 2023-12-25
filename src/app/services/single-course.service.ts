@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {Course} from "../models/course.model";
-
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -38,11 +38,13 @@ export class SingleCourseService {
       (response) => {
         console.log('Post request successful', response);
         if (response == true){
-          alert("You are already enrolled in this Course");
+            this.successNotification("Enroll Request","You are already enrolled in this Course");
         }
-        else if (response == false){
-          this.enrollUser(email,courseId);
-          window.location.reload();
+        // else if (response == false){
+        //   this.enrollUser(email,courseId);
+        // }
+        else {
+            this.successNotification("Enroll Request","You are not enrolled in this course!");
         }
         this.isStudentEnrolled = response;
       },
@@ -62,7 +64,11 @@ export class SingleCourseService {
 
     this.http.post(url, data).subscribe(
       (response) => {
-        alert("Ju sapo u regjistruat ne kurs");
+          this.successNotification("Enroll Request","You enrolled in this course!");
+          setTimeout(() => {
+              // Reload the window
+              window.location.reload();
+          }, 2000);
         console.log('enroll request successful', response);
       },
       (error) => {
@@ -89,8 +95,11 @@ export class SingleCourseService {
 
     this.http.post(url, data).subscribe(
       (response) => {
-        alert("You dropped out of course");
-        window.location.reload();
+        this.successNotification("Course Dropout","You dropped out of course");
+          setTimeout(() => {
+              // Reload the window
+              window.location.reload();
+          }, 2000);
         console.log('dropCourse request successful', response);
       },
       (error) => {
@@ -98,5 +107,10 @@ export class SingleCourseService {
       }
     );
   }
+
+    successNotification(title:string,message:string) {
+        // @ts-ignore
+        Swal.call('Info', title, message,'success');
+    }
 
 }
