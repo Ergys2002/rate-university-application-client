@@ -27,6 +27,7 @@ import { SingleReviewComponent } from './pages/reviews/single-review/single-revi
 import { ReviewFormComponent } from './pages/submitReviewForm/review-form/review-form.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { PopupComponent } from './shared/popup/popup.component';
+import { SearchFormComponent } from './pages/submitReviewForm/search-form/search-form.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { PopupComponent } from './shared/popup/popup.component';
     FullCalendarModule,
     NgTemplateOutlet,
     MatSnackBarModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    SearchFormComponent
   ],
   providers: [
     {
