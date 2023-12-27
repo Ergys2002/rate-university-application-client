@@ -119,3 +119,7 @@ body{
 a:hover{
   text-decoration:none;
 }
+
+.description{
+  margin-top: 10px;
+}

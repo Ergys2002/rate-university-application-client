@@ -3,7 +3,7 @@
   <!-- Your page header content -->
 </section>
 
-<div class="container">
+<div class="container my-5">
   <div class="row">
     <div class="col-lg-4">
       <div class="profile-card-4 z-depth-3">
@@ -12,8 +12,7 @@
             <div class="user-box">
               <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar">
             </div>
-            <h2 class="mb-1 text-white">{{loggedInUser.firstName}}</h2>
-            <h2 class="text-light">{{ loggedInUser.lastName }}</h2>
+            <h2 class="mb-1 text-white">{{loggedInUser.firstName}} {{ loggedInUser.lastName}}</h2>
           </div>
           <div class="card-body">
             <ul class="list-group shadow-none">
@@ -72,14 +71,14 @@
           <div class="p-3">
             <div class="tab-pane" *ngIf="activeTab === 'courses'">
               <div class="row">
-                <div *ngIf="reviewsOfAuthenticatedUser.length === 0" style="text-align: center; padding: 20px; background-color: #c6e2ff; border: 1px solid #5c8dd8; border-radius: 5px; margin-top: 20px;">
+                <div *ngIf="coursesOfAuthenticatedUser.length === 0" style="text-align: center; padding: 20px; background-color: #c6e2ff; border: 1px solid #5c8dd8; border-radius: 5px; margin-top: 20px;">
                   <p style="margin: 5px 0; font-size: 14px; color: #6c757d;">You are still not enrolled for any of our courses yet.</p>
                 </div>
-                <div class="col-md-4 col-sm-6 mb-4 pb-2" *ngFor="let course of coursesOfAuthenticatedUser">
+                <div class="col-md-6 col-sm-6 mb-4 pb-2" *ngFor="let course of coursesOfAuthenticatedUser">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                    <div class="list-card-image">
+                    <div class="list-card-image" style="height: 30vh">
                       <a [routerLink]="'/course/'+course.id">
-                        <img [src]="'http://localhost:8080/img/courses/' + course.picture" class="img-fluid item-img">
+                        <img [src]="'http://localhost:8080/img/courses/' + course.picture" class="img-fluid item-img" style="width:100% ; height:100% ; object-fit: cover ">
                       </a>
                     </div>
                     <div class="p-3 position-relative">
@@ -188,30 +187,45 @@
                   <label class="col-lg-3 col-form-label form-control-label">First name</label>
                   <div class="col-lg-9">
                     <input class="form-control" type="text" formControlName="firstname" [(ngModel)]="loggedInUser.firstName">
+                    <ng-container *ngIf="applyForm.get('firstname') as firstname">
+                      <div *ngIf="firstname.valid">
+                        <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                   <div class="col-lg-9">
                     <input class="form-control" type="text" formControlName="lastname" [(ngModel)]="loggedInUser.lastName">
+                    <ng-container *ngIf="applyForm.get('lastname') as lastname">
+                      <div *ngIf="lastname.valid">
+                        <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Email</label>
                   <div class="col-lg-9">
-                    <input class="form-control" type="email"  formControlName="email" [(ngModel)]="loggedInUser.email">
+                    <input class="form-control" type="email"  [value]="loggedInUser.email" readonly>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
                   <div class="col-lg-9">
                     <input class="form-control" type="email" formControlName="phoneNumber" [(ngModel)]="loggedInUser.phoneNumber">
+                    <ng-container *ngIf="applyForm.get('phoneNumber') as phoneNumber">
+                      <div *ngIf="phoneNumber.valid">
+                        <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
                   <div class="col-lg-9">
-                    <input class="form-control" type="file">
+                    <input class="form-control" type="file" (change)="onFileSelected($event)" name="profilePhoto">
                   </div>
                 </div>
 
@@ -219,18 +233,28 @@
                   <label class="col-lg-3 col-form-label form-control-label">Password</label>
                   <div class="col-lg-9">
                     <input class="form-control" type="password" value="" formControlName="password" >
+                    <ng-container *ngIf="applyForm.get('password') as password">
+                      <div *ngIf="password.valid">
+                        <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
                   <div class="col-lg-9">
                     <input class="form-control" type="password" value="" formControlName="confirmPassword">
+                    <ng-container *ngIf="applyForm.get('confirmPassword') as confirmPassword">
+                      <div *ngIf="confirmPassword.valid">
+                        <i class="fa-regular fa-circle-check" style="color: #26ba3f;"></i>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label"></label>
                   <div class="col-lg-9">
-                    <input type="button" type="submit" class="btn btn-primary" value="Save Changes" >
+                    <input type="button" type="submit" class="btn btn-primary" value="Save Changes">
                   </div>
                 </div>
               </form>

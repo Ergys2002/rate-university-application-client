@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {UserDetails, UserSignIn} from "../../models/user.model";
+import {UserDetails, UserSignIn, UserUpdate} from "../../models/user.model";
 import {CoursesService} from "../../services/courses.service";
 import {Course} from "../../models/course.model";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SingleReviewService} from "../../services/single-review.service";
 import {ReviewModel} from "../../models/review.model";
+import {SweetAlertService} from "../../services/sweet-alert.service";
 
 @Component({
   selector: 'app-my-profile',
@@ -23,11 +24,18 @@ export class MyProfileComponent implements OnInit {
   activeTab: string = 'courses';
 
   newUser: UserSignIn = {};
+  applyForm!: FormGroup;
+  selectedFile: File | null = null;
 
-  constructor(private authService: AuthService, private coursesService: CoursesService, private reviewService: SingleReviewService) {
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  constructor(private authService: AuthService, private swal: SweetAlertService, private coursesService: CoursesService, private reviewService: SingleReviewService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
+    this.createUpdateForm()
     this.authService.loggedInUser().subscribe({
       next: result => {
         this.loggedInUser = result;
@@ -57,41 +65,54 @@ export class MyProfileComponent implements OnInit {
     console.log(this.activeTab)
   }
 
-  applyForm = new FormGroup({
-      firstname: new FormControl(''),
-      lastname: new FormControl(''),
-      email: new FormControl(''),
-    phoneNumber: new FormControl(''),
-    password: new FormControl(''),
-      confirmPassword: new FormControl(''),
-    }
-  );
+  createUpdateForm() {
+    this.applyForm = this.formBuilder.group({
+      firstname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+(?:-[a-zA-Z]+)*$')]],
+      lastname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+(?:-[a-zA-Z]+)*$')]],
+      password: ['', [Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
+      confirmPassword: ['', [ Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]]
+    });
+  }
 
   submitUpdatedUser() {
-    this.authService.submitUpdatedUser(
-      this.applyForm.value.firstname ?? ' ',
-      this.applyForm.value.lastname ?? ' ',
-      this.applyForm.value.email ?? ' ',
-      this.applyForm.value.password ?? ' ',
-        this.applyForm.value.phoneNumber ?? ' ',
-      this.applyForm.value.confirmPassword ?? ''
-    );
+    if (this.applyForm.valid) {
+      if (this.applyForm.get('password')?.value === this.applyForm.get('confirmPassword')?.value) {
 
-    console.log(this.loggedInUser.email)
-    console.log(this.applyForm.value.email)
+        const userData = new UserUpdate();
 
-    // // if(this.applyForm.value.password === this.applyForm.value.confirmPassword && this.loggedInUser.email !== this.applyForm.value.email){
-    //
-    //   console.log(this.applyForm.value.password === this.applyForm.value.confirmPassword && this.loggedInUser.email !== this.applyForm.value.email)
-    //
-    //   this.newUser.email = <string>this.applyForm.value.email
-    //   this.newUser.password = <string>this.applyForm.value.password
-    //
-    //   this.authService.update(this.newUser).subscribe(
-    //     (res: any) => {
-    //       this.ngOnInit()
-    //     })
-    // // }
+        userData.firstName = this.applyForm.get('firstname')?.value;
+        userData.lastName = this.applyForm.get('lastname')?.value;
+        userData.password = this.applyForm.get('password')?.value;
+        userData.phoneNumber = this.applyForm.get('phoneNumber')?.value;
+
+        this.authService.submitUpdatedUser(userData, this.selectedFile).subscribe({
+            next: (res: any) => {
+
+              if (res.status === 202){
+                this.authService.setUser(res)
+              }
+              this.swal.successNotification("User Update", "User updated successfully")
+              this.applyForm.get('password')?.setValue('')
+              this.applyForm.get('confirmPassword')?.setValue('')
+
+            },
+            error: (err: any) => {
+              this.swal.failNotification("User Update", err.message)
+            }
+          }
+        );
+      }else {
+        this.swal.failNotification("User Update", "Password and Confirm Password doesn't match")
+
+      }
+    } else {
+      Object.values(this.applyForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }
+
+
   }
 
 

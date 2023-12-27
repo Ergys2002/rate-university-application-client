@@ -21,3 +21,10 @@ export interface UserDetails {
   phoneNumber: string;
   profilePhoto: string;
 }
+
+export class UserUpdate {
+  firstName: string | undefined;
+  lastName: string | undefined;
+  phoneNumber: string | undefined;
+  password: string | undefined;
+}

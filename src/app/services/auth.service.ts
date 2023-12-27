@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, map } from 'rxjs';
-import { User, UserSignIn, UserDetails } from '../models/user.model';
+import {User, UserSignIn, UserDetails, UserUpdate} from '../models/user.model';
 import {environment} from "../environments/environment";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
@@ -68,67 +68,18 @@ export class AuthService {
   }
 
 
-  submitUpdatedUser(firstname:string, lastname:string, email:string, password:string, phoneNumber:string, confirmPassword:string){
-
-    if (password === confirmPassword ){
-
-      const data = {
-        firstname: firstname,
-        lastname: lastname,
-        email : email,
-        phoneNumber : phoneNumber,
-        password : password,
-      }
-
-      const url =  environment.apiBaseUrl + "user/update-profile";
-
-      this.httpClient.put(url, data).subscribe(
-        (response) => {
-
-          this.setUser(response)
-
-          this.Notification("Profile Updated","You just updated your profile!","success");
-          setTimeout(() => {
-          }, 2000);
-
-
-          if (response == true){
-            this.setUser(response)
-            alert("UserUpdate request submited!");
-          }
-          else if (response == false){
-            alert("Failed to submit review!");
-          }
-        },
-
-        (error) => {
-          if (error.status === 400) {
-            this.Notification("Could not update","There is an existing user with this email","error");
-            // Handle Forbidden error
-          }
-          else {
-            console.log('Other HTTP Status:', error.status);
-            // Handle other errors if needed
-          }
-        }
-      );
+  submitUpdatedUser(req: UserUpdate, profilePhoto: File | null): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('updateUserRequest', JSON.stringify(req));
+    if (profilePhoto) {
+      formData.append('profilePhoto', profilePhoto);
     }
 
-    else{
-      this.Notification("Error","Password and Confirm password do not match","error");
+    const headers = new HttpHeaders({
+      'Content-Type': 'multipart/form-data'
+    });
 
-      setTimeout(() => {
-        this.router.navigateByUrl("/my-profile")
-      }, 2000);
-    }
-  }
-
-  Notification(title:string,message:string,type ?: string) {
-    if (type === undefined) {
-      // @ts-ignore
-      Swal.call('Info', title, message,'success');
-    }
-    // @ts-ignore
-    Swal.call('Info', title, message,type);
+    const url = environment.apiBaseUrl + "user/update-profile";
+    return this.httpClient.put(url, formData, {headers});
   }
 }

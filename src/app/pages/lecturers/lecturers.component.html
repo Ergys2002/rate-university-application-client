@@ -20,7 +20,7 @@
   <div class="container">
       <div class="row">
         <!-- Loop through the lecturers and display each one -->
-        <div class="col-lg-4 col-md-6" *ngFor="let lecturer of lecturers | paginate: { itemsPerPage: 6, currentPage: p }">
+        <div class="col-lg-4 col-md-6" *ngFor="let lecturer of lecturers | paginate: { itemsPerPage: n, currentPage: t }">
           <div class="team-block">
             <div class="team-img" style="height: 60vh; box-shadow: 10px 5px 5px #d2d1d1;">
               <img
@@ -43,7 +43,7 @@
       <div class="col-lg-12 text-center">
         <!--        <nav class="blog-pagination text-center">-->
         <ul>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <pagination-controls (pageChange)="t = $event"></pagination-controls>
         </ul>
         <!--        </nav>-->
       </div>

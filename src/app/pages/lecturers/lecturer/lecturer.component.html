@@ -4,28 +4,28 @@
   <!-- Your page header content -->
 </section>
 
-<div class="container">
+<div class="container my-5">
   <div class="row">
     <div class="col-md-3">
-      <div class="osahan-account-page-left shadow-sm bg-white h-100">
-        <div class="border-bottom p-4">
+      <div class="osahan-account-page-left shadow-sm bg-white h-75">
+        <div class="p-4">
           <div class="osahan-user text-center">
             <div class="osahan-user-media">
               <img class="mb-3 rounded-pill shadow-sm mt-1" [src]="'http://localhost:8080/img/lecturers/' + singleLecturer.profilePicture" alt="gurdeep singh osahan" style="width: 100px; height: 100px; object-fit: cover;">
               <div class="osahan-user-media-body">
-                <h6 class="mb-2">{{ singleLecturer.firstName }}</h6>
-                <p>{{ singleLecturer.email }}</p>
+                <h3 class="mb-2">{{ singleLecturer.firstName }} {{singleLecturer.lastName}}</h3>
+                <h4>{{ singleLecturer.email }}</h4>
 
                 <div class="list-card-badge">
-                  <i class="icofont-star text-warning" *ngFor="let _ of [].constructor(5); let i = index">{{ i < (singleLecturer.rating ?? 0) ? '★' : '☆' }}</i>
+                  <i class="icofont-star text-warning" style="font-size: 24px;" *ngFor="let _ of [].constructor(5); let i = index">{{ i < (singleLecturer.rating ?? 0) ? '★' : '☆' }}</i>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div>
-          <p><i class="icofont-heart"></i> Description</p>
-          <p>{{ singleLecturer.description }}</p>
+        <div class="description">
+          <h4 class="text-center overflow-hidden"> Description</h4>
+          <p class="text-center ">{{ singleLecturer.description }}</p>
         </div>
       </div>
     </div>
@@ -36,11 +36,11 @@
             <h4 class="font-weight-bold mt-0 mb-4"><h2><strong>Courses</strong></h2></h4>
             <div class="row">
               <div class="row">
-                <div class="col-md-4 col-sm-6 mb-4 pb-2" *ngFor="let course of coursesOfLecturer">
+                <div class="col-md-6 col-sm-6 mb-4 pb-2" *ngFor="let course of coursesOfLecturer">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                    <div class="list-card-image">
+                    <div class="list-card-image" style="height: 40vh">
                       <a [routerLink]="'/course/'+course.id">
-                        <img [src]="'http://localhost:8080/img/courses/' + course.picture" class="img-fluid item-img">
+                        <img [src]="'http://localhost:8080/img/courses/' + course.picture" class="img-fluid item-img" style="height: 100%; width:100% ; object-fit: cover ">
                       </a>
                     </div>
                     <div class="p-3 position-relative">
