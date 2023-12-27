@@ -61,9 +61,9 @@ export class MyProfileComponent implements OnInit {
       firstname: new FormControl(''),
       lastname: new FormControl(''),
       email: new FormControl(''),
-      password: new FormControl(''),
-      phoneNumber: new FormControl('')
-
+    phoneNumber: new FormControl(''),
+    password: new FormControl(''),
+      confirmPassword: new FormControl(''),
     }
   );
 
@@ -73,19 +73,25 @@ export class MyProfileComponent implements OnInit {
       this.applyForm.value.lastname ?? ' ',
       this.applyForm.value.email ?? ' ',
       this.applyForm.value.password ?? ' ',
-        this.applyForm.value.phoneNumber ?? ' '
+        this.applyForm.value.phoneNumber ?? ' ',
+      this.applyForm.value.confirmPassword ?? ''
     );
 
-    this.newUser.email = <string>this.applyForm.value.email
-    this.newUser.password = <string>this.applyForm.value.password
+    console.log(this.loggedInUser.email)
+    console.log(this.applyForm.value.email)
 
-    console.log(this.newUser)
-
-    this.authService.update(this.newUser).subscribe(
-      (res: any) => {
-        console.log("success")
-        this.ngOnInit()
-      })
+    // // if(this.applyForm.value.password === this.applyForm.value.confirmPassword && this.loggedInUser.email !== this.applyForm.value.email){
+    //
+    //   console.log(this.applyForm.value.password === this.applyForm.value.confirmPassword && this.loggedInUser.email !== this.applyForm.value.email)
+    //
+    //   this.newUser.email = <string>this.applyForm.value.email
+    //   this.newUser.password = <string>this.applyForm.value.password
+    //
+    //   this.authService.update(this.newUser).subscribe(
+    //     (res: any) => {
+    //       this.ngOnInit()
+    //     })
+    // // }
   }
 
 

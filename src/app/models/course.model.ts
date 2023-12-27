@@ -11,3 +11,5 @@ export interface Course{
   enrolledStudents:number
   picture: string;
 }
+
+

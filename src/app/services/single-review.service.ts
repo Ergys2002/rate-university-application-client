@@ -32,7 +32,6 @@ export class SingleReviewService {
 
    getReviewsByUserEmail () : Observable<ReviewModel[]>{
     return this.http.get<ReviewModel[]>(environment.apiBaseUrl + "reviews/user-reviews");
-       environment.apiBaseUrl + "reviews/course-reviews/" + this.singleCourse.id);
    }
 
   submitReview(rating:string,message:string,email:string){

@@ -12,8 +12,8 @@
             <div class="user-box">
               <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar">
             </div>
-            <h5 class="mb-1 text-white">{{loggedInUser.firstName}}</h5>
-            <h6 class="text-light">{{ loggedInUser.lastName }}</h6>
+            <h2 class="mb-1 text-white">{{loggedInUser.firstName}}</h2>
+            <h2 class="text-light">{{ loggedInUser.lastName }}</h2>
           </div>
           <div class="card-body">
             <ul class="list-group shadow-none">
@@ -35,11 +35,20 @@
                   <small>Email Address</small>
                 </div>
               </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="far fa-calendar"></i>
+                </div>
+                <div class="list-details">
+                  <span>{{ loggedInUser.birthDate}}</span>
+                  <small>Birthdate</small>
+                </div>
+              </li>
             </ul>
             <div class="row text-center mt-4">
               <div class="col p-2">
-                <h4 class="mb-1 line-height-5">154</h4>
-                <small class="mb-0 font-weight-bold">Courses</small>
+                <h2 class="mb-1 line-height-5">{{ coursesOfAuthenticatedUser.length }}</h2>
+                <h3 class="mb-0 font-weight-bold">Enrolled Courses</h3>
               </div>
             </div>
           </div>
@@ -63,16 +72,19 @@
           <div class="p-3">
             <div class="tab-pane" *ngIf="activeTab === 'courses'">
               <div class="row">
+                <div *ngIf="reviewsOfAuthenticatedUser.length === 0" style="text-align: center; padding: 20px; background-color: #c6e2ff; border: 1px solid #5c8dd8; border-radius: 5px; margin-top: 20px;">
+                  <p style="margin: 5px 0; font-size: 14px; color: #6c757d;">You are still not enrolled for any of our courses yet.</p>
+                </div>
                 <div class="col-md-4 col-sm-6 mb-4 pb-2" *ngFor="let course of coursesOfAuthenticatedUser">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                     <div class="list-card-image">
-                      <a href="#">
-                        <img src="img/list/4.png" class="img-fluid item-img">
+                      <a [routerLink]="'/course/'+course.id">
+                        <img [src]="'http://localhost:8080/img/courses/' + course.picture" class="img-fluid item-img">
                       </a>
                     </div>
                     <div class="p-3 position-relative">
                       <div class="list-card-body">
-                        <h6><a [routerLink]="'/course/'+course.id">{{course.title}}</a></h6>
+                        <h3><a [routerLink]="'/course/'+course.id"><strong>{{course.title}}</strong></a></h3>
                         <p class="text-gray mb-3">{{ course.description }}</p>
                         <div class="time">
                           <span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
@@ -106,47 +118,71 @@
 
             <div class="tab-pane" *ngIf="activeTab === 'reviews'">
               <div class="course-review-wrapper">
-                <div class="course-review" *ngFor="let review of reviewsOfAuthenticatedUser">
-                  <div class="profile-img">
-                    <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
-                  </div>
-                  <div class="review-text">
-                    <div class="rating" [ngSwitch]="review.rating">
-                      <div *ngSwitchCase="1">
-                        <a href="#"><i class="fa fa-star"></i></a>
+                <div *ngIf="reviewsOfAuthenticatedUser.length === 0" style="text-align: center; padding: 20px; background-color: #c6e2ff; border: 1px solid #5c8dd8; border-radius: 5px; margin-top: 20px;">
+                  <p style="margin: 5px 0; font-size: 14px; color: #6c757d;">You haven't reviewed any courses yet.</p>
+                </div>
+                <div *ngFor="let review of reviewsOfAuthenticatedUser">
+                  <div *ngIf="review.course">
+                    <div class="course-review">
+                      <div class="profile-img">
+                        <a [routerLink]="'/course/'+review.course.id">
+                          <img [src]="'http://localhost:8080/img/courses/' + review.course.picture" alt="" class="img-fluid">
+                        </a>
                       </div>
-                      <div *ngSwitchCase="2">
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                      </div>
-                      <div *ngSwitchCase="3">
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                      </div>
-                      <div *ngSwitchCase="4">
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                      </div>
-                      <div *ngSwitchCase="5">
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star"></i></a>
+                      <div class="review-text">
+                        <div>
+                          <h3>
+                            <a [routerLink]="'/course/'+review.course.id">
+                              <strong>Course Title: </strong> {{review.course.title}}
+                            </a>
+                          </h3>
+                        </div>
+                        <div class="rating" [ngSwitch]="review.rating">
+                          <div *ngSwitchCase="1">
+                            <strong style="font-size: 1.20em; font-weight: 650;">Rated as: </strong>
+                            <a href="#"> <i class="fa fa-star"></i></a>
+                          </div>
+                          <div *ngSwitchCase="2">
+                            <strong style="font-size: 1.20em; font-weight: 650;">Rated as: </strong>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                          </div>
+                          <div *ngSwitchCase="3">
+                            <strong style="font-size: 1.20em; font-weight: 650;">Rated as: </strong>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                          </div>
+                          <div *ngSwitchCase="4">
+                            <strong style="font-size: 1.20em; font-weight: 650;">Rated as: </strong>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                          </div>
+                          <div *ngSwitchCase="5">
+                            <strong style="font-size: 1.20em; font-weight: 650;">Rated as: </strong>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                          </div>
+                        </div>
+                        <div>
+                          <h3><strong>Description: </strong>{{review.message}}</h3>
+                          <h3><strong>Created at: </strong>{{review.createdAt}}</h3>
+                        </div>
                       </div>
                     </div>
-                    <p>{{review.message}}</p>
                   </div>
                 </div>
               </div>
             </div>
 
 
+
             <div class="tab-pane" *ngIf="activeTab === 'edit'">
-              <p>This is the Edit tab. Add your edit-related content here.</p>
               <form [formGroup]="applyForm" (ngSubmit)="submitUpdatedUser()">
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label">First name</label>
@@ -205,4 +241,3 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>

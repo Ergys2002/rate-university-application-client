@@ -11,7 +11,7 @@
         <div class="border-bottom p-4">
           <div class="osahan-user text-center">
             <div class="osahan-user-media">
-              <img class="mb-3 rounded-pill shadow-sm mt-1" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="gurdeep singh osahan" style="width: 100px; height: 100px; object-fit: cover;">
+              <img class="mb-3 rounded-pill shadow-sm mt-1" [src]="'http://localhost:8080/img/lecturers/' + singleLecturer.profilePicture" alt="gurdeep singh osahan" style="width: 100px; height: 100px; object-fit: cover;">
               <div class="osahan-user-media-body">
                 <h6 class="mb-2">{{ singleLecturer.firstName }}</h6>
                 <p>{{ singleLecturer.email }}</p>
@@ -33,19 +33,19 @@
       <div class="osahan-account-page-right shadow-sm bg-white p-4 h-100">
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade  active show" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
-            <h4 class="font-weight-bold mt-0 mb-4">Courses</h4>
+            <h4 class="font-weight-bold mt-0 mb-4"><h2><strong>Courses</strong></h2></h4>
             <div class="row">
               <div class="row">
                 <div class="col-md-4 col-sm-6 mb-4 pb-2" *ngFor="let course of coursesOfLecturer">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                     <div class="list-card-image">
-                      <a href="#">
-                        <img src="img/list/4.png" class="img-fluid item-img">
+                      <a [routerLink]="'/course/'+course.id">
+                        <img [src]="'http://localhost:8080/img/courses/' + course.picture" class="img-fluid item-img">
                       </a>
                     </div>
                     <div class="p-3 position-relative">
                       <div class="list-card-body">
-                        <h6><a [routerLink]="'/course/'+course.id">{{course.title}}</a></h6>
+                        <h3><a [routerLink]="'/course/'+course.id"><strong>{{course.title}}</strong></a></h3>
                         <p class="text-gray mb-3">{{ course.description }}</p>
                         <div class="time">
                           <span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
