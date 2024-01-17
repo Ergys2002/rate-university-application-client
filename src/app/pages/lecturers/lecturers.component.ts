@@ -13,13 +13,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class LecturersComponent implements OnInit{
 
-  n: number = 3;
+  n: number = 6;
   t : number = 1;
 
   numberOfLecturers?: number;
   numberOfCourses?: number;
   numberOfStudents?: number;
-  lecturers: Lecturer[] = [];
+  lecturers: Lecturer[] =[];
   constructor(private homeService: HomePageService, private lecturerService: LecturerService) {
   }
 
@@ -43,7 +43,7 @@ export class LecturersComponent implements OnInit{
     })
 
     this.lecturerService.getAllLecturers().subscribe({
-      next: data => {
+      next: (data: Lecturer[]) => {
         this.lecturers = data;
         console.log(data)
       }

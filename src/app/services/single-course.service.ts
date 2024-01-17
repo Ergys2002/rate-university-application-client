@@ -4,6 +4,9 @@ import {environment} from "../environments/environment";
 import {Course} from "../models/course.model";
 import Swal from 'sweetalert2';
 import {SweetAlertService} from "./sweet-alert.service";
+import {Lecturer} from "../models/lecturer.model";
+import {Observable} from "rxjs";
+import {b, em} from "@fullcalendar/core/internal-common";
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +14,20 @@ import {SweetAlertService} from "./sweet-alert.service";
 export class SingleCourseService {
 
   isStudentEnrolled:Object = false;
+  enrolled: boolean = false;
 
   constructor(private http: HttpClient
   ,private sweetAlertService:SweetAlertService) { }
 
-  getLecturerById(id : string){
-    return this.http.get(environment.apiBaseUrl + "lecturers/" + id);
+  getLecturerById(id : string): Observable<Lecturer>{
+    return this.http.get<Lecturer>(environment.apiBaseUrl + "lecturers/" + id);
   }
 
   getAverageRating(courseId: string){
     return this.http.get(environment.apiBaseUrl + "reviews/get-average-rating/" + courseId);
   }
+
+
 
 
   isEnrolled(courseId:string,email:string){
@@ -31,43 +37,33 @@ export class SingleCourseService {
       }
       const url =  environment.apiBaseUrl + "courses/isEnrolled";
 
-    this.http.post(url, data).subscribe(
-      (response) => {
-        console.log('Post request successful', response);
-        if (response == true){
-            this.sweetAlertService.successNotification("Enroll Request","You are already enrolled in this Course")
+    this.http.post(url, data).subscribe({
+      next: res =>{
+        if (res == true) {
+          this.enrolled = true;
         }
-        else {
-            this.sweetAlertService.successNotification("Enroll Request","You are not enrolled in this course!");
-        }
-        this.isStudentEnrolled = response;
-      },
-      (error) => {
-        console.error('Error in post request', error);
+        this.isStudentEnrolled = res;
       }
-    );
+    });
+
+    return this.enrolled;
   }
 
   enrollUser(email:string,courseId:string){
-    const data = {
+    const data:{email: string, courseId: string} = {
       email : email,
       courseId : courseId
     }
+
     const url =  environment.apiBaseUrl + "courses/enroll";
 
-    this.http.post(url, data).subscribe(
-      (response) => {
-          this.sweetAlertService.successNotification("Enroll Request","You enrolled in this course!");
-          setTimeout(() => {
-              // Reload the window
-              window.location.reload();
-          }, 2000);
-        console.log('enroll request successful', response);
-      },
-      (error) => {
-        console.error('Error in post request', error);
-      }
-    );
+    if (!this.isEnrolled(courseId,email)) {
+      this.http.post(url, data).subscribe();
+      this.sweetAlertService.successNotification("Enroll Request", "Enrolled successfully");
+      console.log("On Enroll service" + data.email)
+    } else {
+      this.sweetAlertService.failNotification("Enroll Request" , "You are already enrolled");
+    }
   }
 
   dropOutOfCourse(email:string,courseId:string){
@@ -80,10 +76,6 @@ export class SingleCourseService {
     this.http.post(url, data).subscribe(
       (response) => {
           this.sweetAlertService.successNotification("Course Dropout","You dropped out of course");
-          setTimeout(() => {
-              // Reload the window
-              window.location.reload();
-          }, 2000);
         console.log('dropCourse request successful', response);
       },
       (error) => {

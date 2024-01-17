@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {UserDetails, UserSignIn, UserUpdate} from "../../models/user.model";
 import {CoursesService} from "../../services/courses.service";
@@ -7,6 +7,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SingleReviewService} from "../../services/single-review.service";
 import {ReviewModel} from "../../models/review.model";
 import {SweetAlertService} from "../../services/sweet-alert.service";
+import {Route, Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-my-profile',
@@ -23,25 +25,33 @@ export class MyProfileComponent implements OnInit {
 
   activeTab: string = 'courses';
 
-  newUser: UserSignIn = {};
+  profilePhoto: any;
+
+  profilePhotoChanged: boolean = false;
+
+
   applyForm!: FormGroup;
   selectedFile: File | null = null;
 
+
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile)
   }
 
-  constructor(private authService: AuthService, private swal: SweetAlertService, private coursesService: CoursesService, private reviewService: SingleReviewService, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private router: Router, private swal: SweetAlertService, private coursesService: CoursesService, private reviewService: SingleReviewService, private formBuilder: FormBuilder) {
   }
+
 
   ngOnInit() {
+    console.log("NgOnInit called")
     this.createUpdateForm()
     this.authService.loggedInUser().subscribe({
       next: result => {
         this.loggedInUser = result;
+        console.log(this.loggedInUser)
       }
     });
-
 
     this.coursesService.getAllCoursesOfAuthenticatedUser().subscribe({
       next: (data: Course[]) => {
@@ -56,8 +66,6 @@ export class MyProfileComponent implements OnInit {
         this.reviewsOfAuthenticatedUser = data;
       }
     });
-
-    console.log(this.reviewsOfAuthenticatedUser)
   }
 
   setActiveTab(tab: string) {
@@ -70,7 +78,7 @@ export class MyProfileComponent implements OnInit {
       firstname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+(?:-[a-zA-Z]+)*$')]],
       lastname: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+(?:-[a-zA-Z]+)*$')]],
       password: ['', [Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
-      confirmPassword: ['', [ Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
+      confirmPassword: ['', [Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]]
     });
   }
@@ -79,30 +87,37 @@ export class MyProfileComponent implements OnInit {
     if (this.applyForm.valid) {
       if (this.applyForm.get('password')?.value === this.applyForm.get('confirmPassword')?.value) {
 
-        const userData = new UserUpdate();
+        let userData: FormData = new FormData();
 
-        userData.firstName = this.applyForm.get('firstname')?.value;
-        userData.lastName = this.applyForm.get('lastname')?.value;
-        userData.password = this.applyForm.get('password')?.value;
-        userData.phoneNumber = this.applyForm.get('phoneNumber')?.value;
+        userData.append('firstname', this.applyForm.get('firstname')?.value);
+        userData.append('lastname', this.applyForm.get('lastname')?.value);
+        userData.append('password', this.applyForm.get('password')?.value);
+        userData.append('phoneNumber', this.applyForm.get('phoneNumber')?.value);
 
-        this.authService.submitUpdatedUser(userData, this.selectedFile).subscribe({
+        if (this.selectedFile) {
+          userData.append('profilePhoto', this.selectedFile, this.selectedFile.name)
+          this.profilePhotoChanged = true;
+        }
+
+
+        this.authService.submitUpdatedUser(userData).subscribe({
             next: (res: any) => {
 
-              if (res.status === 202){
+              if (res.status === 202) {
                 this.authService.setUser(res)
               }
               this.swal.successNotification("User Update", "User updated successfully")
               this.applyForm.get('password')?.setValue('')
               this.applyForm.get('confirmPassword')?.setValue('')
-
             },
             error: (err: any) => {
               this.swal.failNotification("User Update", err.message)
             }
           }
         );
-      }else {
+
+
+      } else {
         this.swal.failNotification("User Update", "Password and Confirm Password doesn't match")
 
       }
@@ -113,8 +128,10 @@ export class MyProfileComponent implements OnInit {
     }
 
 
+    if (this.profilePhotoChanged) {
+      setTimeout(() => {
+        window.location.reload();      }, 1000);
+    }
+
   }
-
-
-
 }

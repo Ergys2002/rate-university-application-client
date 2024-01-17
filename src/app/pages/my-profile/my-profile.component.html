@@ -9,8 +9,9 @@
       <div class="profile-card-4 z-depth-3">
         <div class="card">
           <div class="card-body text-center bg-primary rounded-top">
-            <div class="user-box">
-              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar">
+            <div class="user-box" >
+              <img *ngIf="loggedInUser.profilePhotoUrl" [src]="'http://localhost:8080/images/' + loggedInUser.profilePhotoUrl" alt="" style="max-height: 110px">
+              <img *ngIf="!loggedInUser.profilePhotoUrl" src="assets/img/user_default.jpg" alt="">
             </div>
             <h2 class="mb-1 text-white">{{loggedInUser.firstName}} {{ loggedInUser.lastName}}</h2>
           </div>
@@ -254,7 +255,7 @@
                 <div class="form-group row">
                   <label class="col-lg-3 col-form-label form-control-label"></label>
                   <div class="col-lg-9">
-                    <input type="button" type="submit" class="btn btn-primary" value="Save Changes">
+                    <input type="submit" class="btn btn-primary" value="Save Changes">
                   </div>
                 </div>
               </form>

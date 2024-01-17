@@ -8,6 +8,7 @@ import {UserDetails} from "../../../models/user.model";
 import {FormControl,FormGroup,ReactiveFormsModule} from "@angular/forms";
 import {SingleReviewService} from "../../../services/single-review.service";
 import {Lecturer} from "../../../models/lecturer.model";
+import {SweetAlertService} from "../../../services/sweet-alert.service";
 
 @Component({
   selector: 'app-course',
@@ -31,6 +32,7 @@ export class CourseComponent implements OnInit{
               private singleCourseService: SingleCourseService,
               private authService: AuthService,
               private singleReviewService: SingleReviewService,
+              private swal: SweetAlertService
               ) {
 
   }
@@ -88,17 +90,19 @@ export class CourseComponent implements OnInit{
   }
 
   enrollUser(){
-    if (!this.isEnrolled()){
       this.singleCourseService.enrollUser(this.loggedInUser.email,this.singleCourse.id);
-      this.ngOnInit();
-    }else {
-      console.log("Enroll user error course.component.ts");
-    }
+    setTimeout(() => {
+      this.ngOnInit()
+    }, 1000);
+
   }
 
 
   dropOut(){
     this.singleCourseService.dropOutOfCourse(this.loggedInUser.email,this.singleCourse.id);
+    setTimeout(() => {
+      this.ngOnInit()
+    }, 1000);
   }
 
 }

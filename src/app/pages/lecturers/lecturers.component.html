@@ -33,7 +33,8 @@
             <div class="team-info">
               <h4> <a [routerLink]="'/lecturer/'+lecturer.id">{{ lecturer.firstName }} {{ lecturer.lastName }} </a></h4>
               <p>{{ lecturer.email }}</p>
-              <p>Rating: {{ lecturer.rating }}</p>
+              <p *ngIf="lecturer.rating <= 0">Rating: Not rated yet</p>
+              <p *ngIf="lecturer.rating >= 0">Rating: {{ lecturer.rating }} out of 5</p>
             </div>
           </div>
         </div>

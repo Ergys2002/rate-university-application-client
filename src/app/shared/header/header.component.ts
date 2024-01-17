@@ -18,6 +18,7 @@ constructor(private authService: AuthService , private router: Router) {
 
   ngOnInit(): void {
     this.loggedIn = this.isTokenValid();
+    console.log(this.loggedIn)
   }
 
   isTokenValid() : boolean{

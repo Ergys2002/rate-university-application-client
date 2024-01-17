@@ -19,12 +19,13 @@ export interface UserDetails {
   email: string;
   birthDate: string;
   phoneNumber: string;
-  profilePhoto: string;
+  profilePhotoUrl: string;
 }
 
-export class UserUpdate {
-  firstName: string | undefined;
-  lastName: string | undefined;
-  phoneNumber: string | undefined;
-  password: string | undefined;
+export interface UserUpdate {
+  firstname: string;
+  lastname: string;
+  phoneNumber: string;
+  password: string;
+  profilePhoto: File;
 }

@@ -68,18 +68,15 @@ export class AuthService {
   }
 
 
-  submitUpdatedUser(req: UserUpdate, profilePhoto: File | null): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('updateUserRequest', JSON.stringify(req));
-    if (profilePhoto) {
-      formData.append('profilePhoto', profilePhoto);
-    }
+  submitUpdatedUser(req : FormData): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data' // Ensure correct content type
+      })
+    };
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'multipart/form-data'
-    });
-
-    const url = environment.apiBaseUrl + "user/update-profile";
-    return this.httpClient.put(url, formData, {headers});
+    return this.httpClient.put(environment.apiBaseUrl + "user/update-profile", req, httpOptions);
   }
+
+
 }

@@ -3,7 +3,7 @@ export interface Lecturer {
   firstName?: string;
   lastName?: string;
   email?: string;
-  rating?: number;
+  rating: number;
   profilePicture?: string;
   description?: string;
 }
